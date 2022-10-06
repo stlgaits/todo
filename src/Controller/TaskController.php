@@ -16,9 +16,7 @@ class TaskController extends AbstractController
         return $this->render('task/list.html.twig', ['tasks' => $this->getDoctrine()->getRepository('App:Task')->findAll()]);
     }
 
-    /**
-     * @Route("/tasks/create", name="task_create")
-     */
+    #[Route('/tasks/create', name: 'task_create')]
     public function createAction(Request $request)
     {
         $task = new Task();
