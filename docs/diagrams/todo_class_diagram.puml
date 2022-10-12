@@ -1,27 +1,24 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
+User "0...*" *-- "1" Task : writes >
 
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+class Task {
+id :int
+createdAt :datetime
+title :string
+content :text
+isDone :boolean
+author :User
+toggle(flag) :void
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+class User {
+id :int
+username :string
+password :string
+email :string
+getRoles() :array
 }
 
 @enduml
