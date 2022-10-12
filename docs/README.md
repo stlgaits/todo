@@ -17,7 +17,9 @@ unit-testing, profiling & making improvements to an existing to-do list app buil
 
 You can view the detailed documentation of this project [here](https://estellemyddleware.github.io/todo/)
 
-#### Downloading the project
+## Installation
+
+### Downloading the project
 
 If you would like to install this project on your computer, you will first need to [clone the repo](https://github.com/EstelleMyddleware/snowtricks) of this project using Git.
 
@@ -31,7 +33,7 @@ ADMIN_PASSWORD=ChooseAStrongPersonalPasswordHere
 ADMIN_USERNAME=youradminusername
  ```
 
-#### Requirements
+### Requirements
 
 * PHP 8.0 or above
 * yarn & Node.js
@@ -43,7 +45,7 @@ ADMIN_USERNAME=youradminusername
 symfony check:requirements  
 ```
 
-#### Install dependencies
+### Install dependencies
 
 Before running the project, you need to run the following commands in order to install the appropriate dependencies.
 
@@ -59,19 +61,19 @@ Now let's create our database. This will use the DATABASE_URL you've provided in
 php bin/console doctrine:database:create
 ```
 
-#### Generating the database schema
+### Generating the database schema
 
 ```bash
  php bin/console doctrine:schema:update --force
  ```
 
-#### Loading the initial data (initial tasks & anonymous user)
+### Loading the initial data (initial tasks & anonymous user)
 
 ```bash
 php bin/console doctrine:fixtures:load --append
 ```
 
-#### Install & build web assets
+### Install & build web assets
 
 ```bash
 yarn install
@@ -88,6 +90,19 @@ The ```symfony serve``` command will start a PHP webserver.
 You can now go to your localhost URL : <http://127.0.0.1:8000> where the app should be displayed.
 
 >NB: alternatively, if you do not wish to use the Symfony webserver, you can always use WAMP / Laragon / MAMP or a similar webserver suite.
+
+## Success Criteria
+
+The aim of this project is to evaluate the following skills :
+
+- to set up & implement unit & functional tests
+- to implement new features on an existing app 
+- to read & describe pieces of code written by other developers
+- to make a test results report
+- to evaluate code quality & app performance
+- to set up an action plan in order to reduce an app's technical debt
+- to provide corrective patches when tests suggest so
+- to give advice on how to improve the project even further
 
 ## Credits
 
