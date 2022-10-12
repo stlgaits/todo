@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+User "0...*" *-- "1" Task : writes >
+
+class Task {
+id :int
+createdAt :datetime
+title :string
+content :text
+isDone :boolean
+author :User
+toggle(flag) :void
+}
+
+class User {
+id :int
+username :string
+password :string
+email :string
+getRoles() :array
+}
+
+@enduml
