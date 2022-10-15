@@ -1,4 +1,6 @@
 {
+    "name": "saro0h/to-do-list",
+    "description": "A simple To-Do list app",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
