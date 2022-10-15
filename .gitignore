@@ -36,6 +36,7 @@ yarn-error.log
 ###> friendsofphp/php-cs-fixer ###
 /.php-cs-fixer.php
 /.php-cs-fixer.cache
+/tools/php-cs-fixer/vendor/
 ###< friendsofphp/php-cs-fixer ###
 
 /migrations/
