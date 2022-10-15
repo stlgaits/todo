@@ -38,7 +38,7 @@ class User implements UserInterface
      * @Assert\Email(message="Le format de l'adresse n'est pas correcte.")
      */
     private string $email;
-    
+
     /**
      * @ORM\Column(type="json")
      */

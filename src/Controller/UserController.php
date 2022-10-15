@@ -16,7 +16,8 @@ class UserController extends AbstractController
     public function listAction(EntityManagerInterface $entityManager): Response
     {
         $users = $entityManager->getRepository(User::class)->findAll();
-        return $this->render('user/list.html.twig',
+        return $this->render(
+            'user/list.html.twig',
             [
                 'users' => $users
             ]
