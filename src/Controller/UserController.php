@@ -24,7 +24,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/users/create', name: 'user_create')]
-    public function createAction(Request $request): Response
+    public function createAction(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -32,12 +32,11 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $password = $this->get('security.password_encoder')->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
 
-            $em->persist($user);
-            $em->flush();
+            $entityManager->persist($user);
+            $entityManager->flush();
 
             $this->addFlash('success', "L'utilisateur a bien été ajouté.");
 
@@ -48,7 +47,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/users/{id}/edit', name: 'user_edit')]
-    public function editAction(User $user, Request $request): Response
+    public function editAction(User $user, Request $request, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(UserType::class, $user);
 
@@ -58,7 +57,7 @@ class UserController extends AbstractController
             $password = $this->get('security.password_encoder')->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
 
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager->flush();
 
             $this->addFlash('success', "L'utilisateur a bien été modifié");
 
