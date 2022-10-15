@@ -67,7 +67,7 @@ class Task
         return $this->title;
     }
 
-    public function setTitle($title): void
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
@@ -77,7 +77,7 @@ class Task
         return $this->content;
     }
 
-    public function setContent($content): void
+    public function setContent(string $content): void
     {
         $this->content = $content;
     }
@@ -87,7 +87,7 @@ class Task
         return $this->isDone;
     }
 
-    public function toggle($flag): void
+    public function toggle(bool $flag): void
     {
         $this->isDone = $flag;
     }
