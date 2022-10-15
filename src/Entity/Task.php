@@ -22,7 +22,7 @@ class Task
     /**
      * @ORM\Column(type="datetime")
      */
-    private DateTime $createdAt;
+    private \Datetime $createdAt;
 
     /**
      * @ORM\Column(type="string")
@@ -52,12 +52,12 @@ class Task
         return $this->id;
     }
 
-    public function getCreatedAt(): \Datetime|DateTime
+    public function getCreatedAt(): \Datetime
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt($createdAt): void
+    public function setCreatedAt(\DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
