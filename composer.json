@@ -97,6 +97,7 @@
         }
     },
     "require-dev": {
+        "phpmd/phpmd": "^2.13",
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan": "^1.8",
         "phpstan/phpstan-beberlei-assert": "^1.0",
