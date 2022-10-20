@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SecurityController extends AbstractController
 {
     #[Route('/login', name: 'login')]
-    public function loginAction(Request $request): Response
+    public function login(Request $request): Response
     {
         $authenticationUtils = $this->get('security.authentication_utils');
 
