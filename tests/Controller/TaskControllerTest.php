@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Controller;
 
+use App\Test\CustomTestCase;
 use Hautelook\AliceBundle\PhpUnit\ReloadDatabaseTrait;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * @covers \App\Entity\TaskController
  */
-class TaskControllerTest extends WebTestCase
+class TaskControllerTest extends CustomTestCase
 {
     use ReloadDatabaseTrait;
 
