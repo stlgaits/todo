@@ -1,7 +1,8 @@
 <?php
 
-namespace Tests\Controller;
+namespace App\Tests\Controller;
 
+use Hautelook\AliceBundle\PhpUnit\ReloadDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
@@ -9,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  */
 class TaskControllerTest extends WebTestCase
 {
+    use ReloadDatabaseTrait;
 
     public function  testCanReadTasksList(): void
     {

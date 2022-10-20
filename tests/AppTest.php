@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
  */
 class AppTest extends TestCase
 {
-    public function testTestsAreworking(): void
+    public function testTestsAreWorking(): void
     {
         $this->assertEquals(2, 1 + 1);
     }
