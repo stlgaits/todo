@@ -4,6 +4,9 @@ namespace App\Tests;
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers
+ */
 class AppTest extends TestCase
 {
     public function testTestsAreworking(): void
