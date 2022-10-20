@@ -124,4 +124,11 @@ class User implements UserInterface
     {
         return (string) $this->username;
     }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
 }

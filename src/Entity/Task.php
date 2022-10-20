@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use _PHPStan_acbb55bae\Nette\Utils\DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
