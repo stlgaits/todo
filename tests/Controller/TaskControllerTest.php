@@ -10,6 +10,15 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class TaskControllerTest extends WebTestCase
 {
 
+    public function  testCanReadTasksList(): void
+    {
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/tasks');
+        $this->assertResponseIsSuccessful();
+
+    }
+
+
     public function  testCanAccessTaskCreationPage(): void
     {
         $client = static::createClient();
@@ -20,8 +29,8 @@ class TaskControllerTest extends WebTestCase
 
     public function  testCanCreateNewTask(): void
     {
-//        $client = static::createClient();
-//        $crawler = $client->request('GET', '/tasks/create');
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/tasks/create');
 //        $this->assertResponseIsSuccessful();
 
     }
