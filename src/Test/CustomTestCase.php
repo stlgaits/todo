@@ -18,9 +18,20 @@ class CustomTestCase extends WebTestCase
         return static::getContainer()->get('doctrine')->getManager();
     }
 
-    protected function createUser(): User
+    protected function createUser(string $username, string $password, string $email): User
     {
+        $container = static::getContainer();
+        $em = $this->getEntityManager();
+
         $user = new User();
+        $user->setEmail($email);
+        $user->setUsername($username);
+        $encoded = $container->get('security.password_hasher')->hashPassword($user, $password);
+        $user->setPassword($encoded);
+
+        $em->persist($user);
+        $em->flush();
+
         return $user;
     }
 

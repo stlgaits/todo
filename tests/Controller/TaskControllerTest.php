@@ -78,7 +78,14 @@ class TaskControllerTest extends CustomTestCase
         $crawler = $client->request('GET', '/tasks/{id}/toggle');
     }
 
-    public function testCanDeleteATask(): void
+    public function testAuthorCanDeleteTheirOwnTask(): void
+    {
+        $this->markTestIncomplete();
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/tasks/{id}/delete');
+    }
+
+    public function testCannotDeleteTaskOfWhichUserIsNotTheAuthor(): void
     {
         $this->markTestIncomplete();
         $client = static::createClient();
