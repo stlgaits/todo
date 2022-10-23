@@ -8,12 +8,12 @@ use App\Test\CustomTestCase;
 
 class UserControllerTest extends CustomTestCase
 {
-    public function testCanAccessUsersListPage(): void
+    public function testCannotAccessUsersListPageAnonymously(): void
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/users');
 
-        $this->assertResponseIsSuccessful();
+        $this->assertResponseStatusCodeSame(401);
     }
 
     public function testOnlyAdminUsersCanAccessUsersListPage(): void
