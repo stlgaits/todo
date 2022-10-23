@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @covers Task
  */
-class TaskTest extends  TestCase
+class TaskTest extends TestCase
 {
     public function testItWorks(): void
     {
@@ -66,13 +66,23 @@ class TaskTest extends  TestCase
         $this->markTestIncomplete();
     }
 
+    public function testATaskShouldHaveAnAuthor(): void
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testDefaultTasksShouldBeAssignedToAnonymousUser(): void
+    {
+        $this->markTestIncomplete();
+    }
+
+
     public function titleProvider(): \Generator
     {
         yield ["Faire la vaisselle"];
         yield ["Ranger ma chambre"];
         yield ["Payer la facture d'électricité"];
         yield [Lorem::sentence()];
-
     }
 
 //    public function invalidTitleProvider(): \Generator
