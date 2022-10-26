@@ -154,6 +154,8 @@
       <path value="$PROJECT_DIR$/vendor/theofidry/alice-data-fixtures" />
       <path value="$PROJECT_DIR$/vendor/hautelook/alice-bundle" />
       <path value="$PROJECT_DIR$/vendor/nelmio/alice" />
+      <path value="$PROJECT_DIR$/vendor/symfony/lock" />
+      <path value="$PROJECT_DIR$/vendor/symfony/rate-limiter" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />
