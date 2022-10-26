@@ -6,14 +6,37 @@ namespace App\Tests\Controller;
 
 use App\Test\CustomTestCase;
 
+/**
+ * @group security
+ * @covers \App\Controller\SecurityController
+ */
 class SecurityControllerTest extends CustomTestCase
 {
-    public function testLogin(): void
+    public function testAnyoneCanAccessLoginForm(): void
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/login');
         $this->assertResponseIsSuccessful();
     }
+
+    public function testLogin(): void
+    {
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/login');
+        $user = $this->createUser("mary", "mypassword", "mary.funky@gmail.com");
+        $client->loginUser($user);
+        $this->markTestIncomplete();
+        $this->assertResponseIsSuccessful();
+    }
+
+
+    public function testCannotLoginWithInvalidCredentials(): void
+    {
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/login');
+        $this->markTestIncomplete();
+    }
+
 
     public function testLogout(): void
     {

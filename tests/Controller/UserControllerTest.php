@@ -5,45 +5,59 @@ declare(strict_types=1);
 namespace App\Tests\Controller;
 
 use App\Test\CustomTestCase;
+use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 
+/**
+ * @group security
+ */
 class UserControllerTest extends CustomTestCase
 {
+    use RefreshDatabaseTrait;
+
     public function testCannotAccessUsersListPageAnonymously(): void
     {
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/users');
-
+        $client = $this->createClient();
+        $client->request('GET', '/users');
         $this->assertResponseStatusCodeSame(401);
     }
 
     public function testOnlyAdminUsersCanAccessUsersListPage(): void
     {
-        $this->markTestIncomplete();
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/users');
+        $client = $this->createClient();
+        $user = $this->createAdminUser("mario", "notluigi", "mario.bros@nintendo.fr");
+        $client->loginUser($user);
+        $client->request('GET', '/users');
         $this->assertResponseIsSuccessful();
     }
 
     public function testAnonymousUserCannotAccessUsersListPage(): void
     {
-        $this->markTestIncomplete();
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/users');
-        $this->assertResponseStatusCodeSame(403);
+        $client = $this->createClient();
+        $client->request('GET', '/users');
+        $this->assertResponseStatusCodeSame(401);
     }
 
     public function testNonAdminUserCannotAccessUsersListPage(): void
     {
-        $this->markTestIncomplete();
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/users');
-
+        $client = $this->createClient();
+        $user = $this->createUser("mario", "notluigi", "mario.bros@nintendo.fr");
+        $client->loginUser($user);
+        $client->request('GET', '/users');
         $this->assertResponseStatusCodeSame(403);
     }
 
     public function testAdminUserCanCreateNewUser(): void
     {
-        $this->markTestIncomplete();
+        $client = $this->createClient();
+        $user = $this->createAdminUser("IamAdmin", "mysupersecureadminpwd", "admin@gmail.com");
+        $client->loginUser($user);
+        $client->request('GET', '/users/create');
+//        $this->markTestIncomplete();
+        // @TODO: submit form & test whether new user is persisted in database
+        $client->submitForm('Add comment', [
+            'comment_form[content]' => '...',
+        ]);
+        $this->assertResponseIsSuccessful();
     }
 
     public function testNonAdminUserCannotCreateNewUser(): void

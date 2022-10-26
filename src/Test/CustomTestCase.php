@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Test;
 
+use App\Entity\Task;
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -35,9 +37,14 @@ class CustomTestCase extends WebTestCase
         return $user;
     }
 
-    protected function createAdminUser(): User
+    protected function createAdminUser(string $username, string $password, string $email): User
     {
-        $user = new User();
+        $em = $this->getEntityManager();
+        $user = $this->createUser($username, $password, $email);
+        $user->setRoles(['ROLE_ADMIN']);
+        $em->persist($user);
+        $em->flush();
+
         return $user;
     }
 
@@ -55,8 +62,10 @@ class CustomTestCase extends WebTestCase
     {
     }
 
-    protected function login(): void
+    protected function login(User $user): void
     {
+        $client = static::createClient();
+        $client->loginUser($user);
     }
 
     protected function logout(): void
