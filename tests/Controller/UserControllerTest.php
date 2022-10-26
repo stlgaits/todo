@@ -14,13 +14,6 @@ class UserControllerTest extends CustomTestCase
 {
     use RefreshDatabaseTrait;
 
-    public function testCannotAccessUsersListPageAnonymously(): void
-    {
-        $client = $this->createClient();
-        $client->request('GET', '/users');
-        $this->assertResponseStatusCodeSame(401);
-    }
-
     public function testOnlyAdminUsersCanAccessUsersListPage(): void
     {
         $client = $this->createClient();
@@ -34,7 +27,8 @@ class UserControllerTest extends CustomTestCase
     {
         $client = $this->createClient();
         $client->request('GET', '/users');
-        $this->assertResponseStatusCodeSame(401);
+        // instead of throwing a 401, the user should be redirected towards the homepage
+        $this->assertResponseStatusCodeSame(302);
     }
 
     public function testNonAdminUserCannotAccessUsersListPage(): void
