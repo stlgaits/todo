@@ -36,16 +36,14 @@ class SecurityControllerTest extends CustomTestCase
         $client = $this->createClient();
         $user = $this->createUser("mary", "mypassword", "mary.funky@gmail.com");
         $crawler = $client->request('GET', '/login');
-        $client->loginUser($user);
+//        $client->loginUser($user);
         $client->submitForm('Se connecter', [
-            'login_form[_username]' => 'mary',
-            'login_form[_password]' => 'mypassword',
+            '_username' => 'mary',
+            '_password' => 'mypassword',
         ]);
         // user should be redirected to the homepage once logged in
-
         $this->assertResponseStatusCodeSame(302);
-        $this->assertResponseIsSuccessful();
-//        $this->markTestIncomplete();
+        // @TODO: how can we test User Session to check that current user is indeed our test user
     }
 
 

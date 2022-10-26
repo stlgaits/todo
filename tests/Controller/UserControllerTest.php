@@ -46,11 +46,11 @@ class UserControllerTest extends CustomTestCase
         $user = $this->createAdminUser("IamAdmin", "mysupersecureadminpwd", "admin@gmail.com");
         $client->loginUser($user);
         $client->request('GET', '/users/create');
-//        $this->markTestIncomplete();
+        $this->markTestIncomplete();
         // @TODO: submit form & test whether new user is persisted in database
-        $client->submitForm('Add comment', [
-            'comment_form[content]' => '...',
-        ]);
+//        $client->submitForm('Add comment', [
+//            'comment_form[content]' => '...',
+//        ]);
         $this->assertResponseIsSuccessful();
     }
 
