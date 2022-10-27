@@ -1,9 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Task;
 use App\Form\TaskType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,59 +15,63 @@ use Symfony\Component\HttpFoundation\Request;
 class TaskController extends AbstractController
 {
     #[Route('/tasks', name: 'task_list')]
-    public function listAction()
+    public function list(EntityManagerInterface $entityManager): Response
     {
-        return $this->render('task/list.html.twig', ['tasks' => $this->getDoctrine()->getRepository('App:Task')->findAll()]);
+        $tasks = $entityManager->getRepository(Task::class)->findAll();
+        return $this->render(
+            'task/list.html.twig',
+            [
+                'tasks' => $tasks
+            ]
+        );
     }
 
     #[Route('/tasks/create', name: 'task_create')]
-    public function createAction(Request $request)
+    public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $task = new Task();
         $form = $this->createForm(TaskType::class, $task);
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-
-            $em->persist($task);
-            $em->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($task);
+            $entityManager->flush();
 
             $this->addFlash('success', 'La tâche a été bien été ajoutée.');
 
             return $this->redirectToRoute('task_list');
         }
 
-        return $this->render('task/create.html.twig', ['form' => $form->createView()]);
+        return $this->renderForm('task/create.html.twig', ['form' => $form]);
     }
 
     #[Route('/tasks/{id}/edit', name: 'task_edit')]
-    public function editAction(Task $task, Request $request)
+    public function edit(Task $task, Request $request, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(TaskType::class, $task);
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
 
             $this->addFlash('success', 'La tâche a bien été modifiée.');
 
             return $this->redirectToRoute('task_list');
         }
 
-        return $this->render('task/edit.html.twig', [
-            'form' => $form->createView(),
+        return $this->renderForm('task/edit.html.twig', [
+            'form' => $form,
             'task' => $task,
         ]);
     }
 
     #[Route('/tasks/{id}/toggle', name: 'task_toggle')]
-    public function toggleTaskAction(Task $task)
+    public function toggleTask(Task $task, EntityManagerInterface $entityManager): Response
     {
         $task->toggle(!$task->isDone());
-        $this->getDoctrine()->getManager()->flush();
+        $entityManager->flush();
 
         $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
 
@@ -71,11 +79,10 @@ class TaskController extends AbstractController
     }
 
     #[Route('/tasks/{id}/delete', name: 'task_delete')]
-    public function deleteTaskAction(Task $task)
+    public function deleteTask(Task $task, EntityManagerInterface $entityManager): Response
     {
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($task);
-        $em->flush();
+        $entityManager->remove($task);
+        $entityManager->flush();
 
         $this->addFlash('success', 'La tâche a bien été supprimée.');
 
