@@ -36,7 +36,6 @@ class SecurityControllerTest extends CustomTestCase
         $client = $this->createClient();
         $user = $this->createUser("mary", "mypassword", "mary.funky@gmail.com");
         $crawler = $client->request('GET', '/login');
-//        $client->loginUser($user);
         $client->submitForm('Se connecter', [
             '_username' => 'mary',
             '_password' => 'mypassword',
