@@ -39,5 +39,4 @@ class DefaultControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('h1', 'Hello Jane!');
     }
-
 }

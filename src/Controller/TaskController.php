@@ -35,7 +35,6 @@ class TaskController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $entityManager->persist($task);
             $entityManager->flush();
 
@@ -69,7 +68,7 @@ class TaskController extends AbstractController
     }
 
     #[Route('/tasks/{id}/toggle', name: 'task_toggle')]
-    public function toggleTask(Task $task,  EntityManagerInterface $entityManager): Response
+    public function toggleTask(Task $task, EntityManagerInterface $entityManager): Response
     {
         $task->toggle(!$task->isDone());
         $entityManager->flush();
@@ -80,7 +79,7 @@ class TaskController extends AbstractController
     }
 
     #[Route('/tasks/{id}/delete', name: 'task_delete')]
-    public function deleteTask(Task $task,  EntityManagerInterface $entityManager): Response
+    public function deleteTask(Task $task, EntityManagerInterface $entityManager): Response
     {
         $entityManager->remove($task);
         $entityManager->flush();
