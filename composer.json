@@ -98,11 +98,12 @@
         }
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
+        "fakerphp/faker": "^1.20",
         "hautelook/alice-bundle": "^2.10",
         "pdepend/pdepend": "2.12.*",
         "phpmd/phpmd": "^2.13",
         "phpstan/extension-installer": "^1.1",
-        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "phpstan/phpstan": "^1.8",
         "phpstan/phpstan-beberlei-assert": "^1.0",
         "phpstan/phpstan-doctrine": "^1.3",
