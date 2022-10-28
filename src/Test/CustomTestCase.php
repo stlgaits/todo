@@ -6,12 +6,14 @@ namespace App\Test;
 
 use App\Entity\Task;
 use App\Entity\User;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class CustomTestCase extends WebTestCase
 {
+    use RefreshDatabaseTrait;
+
     /*
     * @throws Exception
     */

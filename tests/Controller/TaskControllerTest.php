@@ -4,40 +4,62 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller;
 
+use App\Entity\Task;
 use App\Test\CustomTestCase;
-use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 
 /**
  * @covers \App\Entity\TaskController
  */
 class TaskControllerTest extends CustomTestCase
 {
-    use RefreshDatabaseTrait;
 
-    public function testCanReadTasksList(): void
+    public function testUserCanReadTasksList(): void
     {
-        $client = static::createClient();
+        $client = $this->createClient();
         $crawler = $client->request('GET', '/tasks');
         $response = $client->getResponse()->getContent();
         $this->assertResponseIsSuccessful();
         $this->markTestIncomplete();
         // @TODO: test whether the response ACTUALLY contains a list of tasks
+        // @TODO: ensure route is only accessible to logged in users
     }
 
-    public function testCanAccessTaskCreationPage(): void
+    public function testCannoReadTasksListAnonymously(): void
     {
-        $client = static::createClient();
+        $this->markTestIncomplete();
+    }
+
+
+    public function testCannotCreateTaskAnonymously(): void
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testLoggedInUsersCanAccessTaskCreationPage(): void
+    {
+        $client = $this->createClient();
         $crawler = $client->request('GET', '/tasks/create');
         $this->assertResponseIsSuccessful();
+        $this->markTestIncomplete();
     }
 
     public function testUserCanCreateNewTask(): void
     {
-        $this->markTestSkipped();
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/tasks/create');
-        // @TODO: submit form data
-        $this->assertResponseIsSuccessful();
+        $client = $this->createClient();
+        $user = $this->createUser("mario", "notluigi", "mario.bros@nintendo.fr");
+        $client->loginUser($user);
+        $client->request('GET', '/tasks/create');
+        $client->submitForm('Ajouter', [
+            'task[title]' => 'Faire un truc cool',
+            'task[content]' => 'Mais faut vraiment que ce soit archi cool quoi',
+        ]);
+        $task = $this->getEntityManager()->getRepository(Task::class)->findOneBy(['title' => 'Faire un truc cool']);
+        $this->assertResponseStatusCodeSame(302);
+        $this->assertResponseRedirects('/tasks', 302);
+        $this->assertNotNull($task);
+        $this->assertEquals("Mais faut vraiment que ce soit archi cool quoi", $task->getContent());
+        $this->assertFalse($task->isDone());
+//        $this->assertRouteSame();
     }
 
     public function testTaskAuthorIsSetToCurrentUserWhenCreated(): void

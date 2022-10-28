@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Tests\Controller;
 
 use App\Test\CustomTestCase;
-use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 
 /**
  * @group security
@@ -13,7 +12,6 @@ use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
  */
 class SecurityControllerTest extends CustomTestCase
 {
-    use RefreshDatabaseTrait;
 
     public function testAnyoneCanAccessLoginForm(): void
     {
@@ -49,7 +47,14 @@ class SecurityControllerTest extends CustomTestCase
     public function testCannotLoginWithInvalidCredentials(): void
     {
         $client = static::createClient();
+        $user = $this->createUser("mary", "mypassword", "mary.funky@gmail.com");
         $crawler = $client->request('GET', '/login');
+        $client->submitForm('Se connecter', [
+            '_username' => 'emily',
+            '_password' => 'mypassword',
+        ]);
+        $this->assertResponseStatusCodeSame(302);
+        // @TODO: how can we test User Session to check that current user is indeed our test user
         $this->markTestIncomplete();
     }
 
