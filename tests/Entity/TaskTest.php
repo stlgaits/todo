@@ -47,20 +47,28 @@ class TaskTest extends KernelTestCase
      */
     public function testTaskShouldHaveATitleString(string $title): void
     {
-        $task = new Task();
+        $task = $this->createTaskObject();
         $task->setTitle($title);
         $this->assertSame($title, $task->getTitle());
     }
 
-    public function testTaskShouldHaveADescription(): void
+    /**
+     * @dataProvider contentProvider
+     */
+    public function testTaskShouldHaveADescription(string $content): void
     {
-        $this->markTestIncomplete();
+        $task = $this->createTaskObject();
+        $task->setContent($content);
+        $this->assertSame($content, $task->getContent());
     }
 
     public function testATaskShouldHaveAnAuthor(): void
     {
-
-        $this->markTestIncomplete();
+        $task = $this->createTaskObject();
+        $this->assertNotNull($task);
+        $this->validateTask($task);
+        $this->assertNotNull($task->getAuthor());
+//        $this->markTestIncomplete();
     }
 
     public function testDefaultTasksShouldBeAssignedToAnonymousUser(): void
@@ -68,21 +76,20 @@ class TaskTest extends KernelTestCase
         $this->markTestIncomplete();
     }
 
+
     /**
      * Ensures created Task matches validation constraints
      */
-    public function validateTask(Task $task, int $number = 0): void
+    public function validateTask(Task $task): void
     {
         self::bootKernel();
         $errors = $this->getContainer()->get('validator')->validate($task);
-
-        $errorsMessages = [];
+        $validationErrors = [];
         /** @var ConstraintViolation $error */
         foreach ($errors as $error) {
-            $errorsMessages[] = $error->getPropertyPath() . ' => ' . $error->getMessage();
+            $validationErrors[] = $error->getPropertyPath() . ' ' . $error->getMessage();
         }
-
-        $this->assertCount($number, $errors, implode(',', $errorsMessages));
+        $this->assertCount(0, $errors, implode(',', $validationErrors));
     }
 
 
@@ -94,6 +101,14 @@ class TaskTest extends KernelTestCase
         yield [Lorem::sentence()];
     }
 
+    public function contentProvider(): \Generator
+    {
+        yield ["Faire la vaisselle"];
+        yield ["Ranger ma chambre"];
+        yield ["Payer la facture d'électricité"];
+        yield [Lorem::paragraph()];
+    }
+
 
     public function createTaskObject(): Task
     {
@@ -101,6 +116,7 @@ class TaskTest extends KernelTestCase
         $task->setTitle("This is a test task");
         $task->setContent("I mean, I could write anything here, right?");
         $task->isDone(false);
+        $this->validateTask($task);
         return $task;
     }
 }
