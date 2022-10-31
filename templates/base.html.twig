@@ -12,32 +12,35 @@
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
-    <body>
-        <nav class="navbar navbar-fixed-top" role="navigation">
+    <body class="h-100">
+        <nav class="navbar sticky-top mb-5" role="navigation">
             <div class="container">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="{{ path('homepage') }}">To Do List app</a>
-
-                    <img src="{{absolute_url(asset('build/img/Logo_OpenClassrooms.png')) }}" alt="OpenClassrooms" />
+                    <img src="{{absolute_url(asset('build/img/Logo_OpenClassrooms.png')) }}" alt="OpenClassrooms logo" />
                 </div>
             </div>
         </nav>
 
         <!-- Page Content -->
         <div class="container">
-            <div class="row">
-                <a href="{{ path('user_create') }}" class="btn btn-primary">Créer un utilisateur</a>
-
+            <div class="row my-5">
+                <div class="col">
+                    <a href="{{ path('user_create') }}" class="btn btn-primary">Créer un utilisateur</a>
+                </div>
                 {% if app.user %}
-                    <a href="{{ path('logout') }}" class="pull-right btn btn-danger">Se déconnecter</a>
+                    <div class="col text-end">
+                        <a href="{{ path('logout') }}" class="pull-right btn btn-danger">Se déconnecter</a>
+                    </div>
                 {% endif %}
-
                 {% if not app.user and 'login' != app.request.attributes.get('_route') %}
-                    <a href="{{ path('login') }}" class="btn btn-success">Se connecter</a>
+                    <div class="col text-end">
+                        <a href="{{ path('login') }}" class="btn btn-success">Se connecter</a>
+                    </div>
                 {% endif %}
             </div>
 
-            <div class="row">
+            <div class="row my-5">
                 <div class="col-md-12">
                     {% for flash_message in app.session.flashBag.get('success') %}
                         <div class="alert alert-success" role="alert">
@@ -59,14 +62,14 @@
             <br />
 
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 my-5">
                     {% block body %}{% endblock %}
                 </div>
             </div>
         </div>
         <!-- /.container -->
 
-        <div class="container">
+        <div class="container-fluid">
 
             <hr>
             <footer>
