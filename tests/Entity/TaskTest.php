@@ -2,17 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Unit\Entity;
+namespace App\Tests\Entity;
 
 use App\Entity\Task;
 use DateTime;
 use Faker\Provider\Lorem;
-use PHPUnit\Framework\TestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\Validator\ConstraintViolation;
 
 /**
  * @covers Task
  */
-class TaskTest extends TestCase
+class TaskTest extends KernelTestCase
 {
     public function testItWorks(): void
     {
@@ -51,16 +52,6 @@ class TaskTest extends TestCase
         $this->assertSame($title, $task->getTitle());
     }
 
-//    /**
-//     * @dataProvider invalidTitleProvider
-//     */
-//    public function testTaskShouldHaveAValidTitle($title): void
-//    {
-//        $task = new Task();
-//        $task->setTitle($title);
-//        $this->expectError();
-//    }
-
     public function testTaskShouldHaveADescription(): void
     {
         $this->markTestIncomplete();
@@ -68,12 +59,30 @@ class TaskTest extends TestCase
 
     public function testATaskShouldHaveAnAuthor(): void
     {
+
         $this->markTestIncomplete();
     }
 
     public function testDefaultTasksShouldBeAssignedToAnonymousUser(): void
     {
         $this->markTestIncomplete();
+    }
+
+    /**
+     * Ensures created Task matches validation constraints
+     */
+    public function validateTask(Task $task, int $number = 0): void
+    {
+        self::bootKernel();
+        $errors = $this->getContainer()->get('validator')->validate($task);
+
+        $errorsMessages = [];
+        /** @var ConstraintViolation $error */
+        foreach ($errors as $error) {
+            $errorsMessages[] = $error->getPropertyPath() . ' => ' . $error->getMessage();
+        }
+
+        $this->assertCount($number, $errors, implode(',', $errorsMessages));
     }
 
 
@@ -85,19 +94,13 @@ class TaskTest extends TestCase
         yield [Lorem::sentence()];
     }
 
-//    public function invalidTitleProvider(): \Generator
-//    {
-//        yield [1];
-//        yield [9930];
-//        yield ["A"];
-//        yield ["1"];
-//        yield [null];
-//        yield [0];
-//        yield [Lorem::text()];
-//        yield [""];
-//        yield [[]];
-//        yield [["Faire la vaisselle"]];
-//        yield [";"];
-//        yield ["@"];
-//    }
+
+    public function createTaskObject(): Task
+    {
+        $task = new Task();
+        $task->setTitle("This is a test task");
+        $task->setContent("I mean, I could write anything here, right?");
+        $task->isDone(false);
+        return $task;
+    }
 }

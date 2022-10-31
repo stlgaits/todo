@@ -44,7 +44,7 @@ security:
     access_control:
          - { path: ^/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/users, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+         - { path: ^/tasks, roles: ROLE_USER }
 
 when@test:
     security:

@@ -56,12 +56,19 @@ class CustomTestCase extends WebTestCase
         return $task;
     }
 
-    protected function toggleTask(): void
+    protected function toggleTask(Task $task, bool $done): void
     {
+        $em = $this->getEntityManager();
+        $task->isDone($done);
+        $em->persist($task);
+        $em->flush();
     }
 
-    protected function deleteTask(): void
+    protected function deleteTask(Task $task): void
     {
+        $em = $this->getEntityManager();
+        $em->remove($task);
+        $em->flush();
     }
 
     protected function login(User $user): void
