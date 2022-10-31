@@ -9,7 +9,7 @@ use App\Test\CustomTestCase;
 /**
  * @group security
  */
-class UserControllerTest extends CustomTestCase
+final class UserControllerTest extends CustomTestCase
 {
     public function testOnlyAdminUsersCanAccessUsersListPage(): void
     {

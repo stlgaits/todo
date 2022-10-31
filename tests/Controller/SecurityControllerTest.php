@@ -10,7 +10,7 @@ use App\Test\CustomTestCase;
  * @group security
  * @covers \App\Controller\SecurityController
  */
-class SecurityControllerTest extends CustomTestCase
+final class SecurityControllerTest extends CustomTestCase
 {
 
     public function testAnyoneCanAccessLoginForm(): void

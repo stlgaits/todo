@@ -7,12 +7,12 @@ use App\Test\CustomTestCase;
 /**
  * @covers \App\Entity\DefaultController
  */
-class DefaultControllerTest extends CustomTestCase
+final class DefaultControllerTest extends CustomTestCase
 {
     public function testIndex(): void
     {
         self::ensureKernelShutdown();
-        $client = static::createClient();
+        $client = self::createClient();
 
         $crawler = $client->request('GET', '/');
 
@@ -21,9 +21,9 @@ class DefaultControllerTest extends CustomTestCase
         $this->assertSelectorTextContains('h1', "Bienvenue sur Todo List, l'application vous permettant de gérer l'ensemble de vos tâches sans effort !");
     }
 
-    public function testVisitingWhileLoggedIn()
+    public function testVisitingWhileLoggedIn(): void
     {
-        $client = static::createClient();
+        $client = self::createClient();
 
         $user = $this->createUser("mary", "mypassword", "mary.funky@gmail.com");
         // simulate $user being logged in

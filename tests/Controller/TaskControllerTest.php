@@ -10,7 +10,7 @@ use App\Test\CustomTestCase;
 /**
  * @covers \App\Entity\TaskController
  */
-class TaskControllerTest extends CustomTestCase
+final class TaskControllerTest extends CustomTestCase
 {
 
     public function testUserCanReadTasksList(): void
@@ -20,9 +20,11 @@ class TaskControllerTest extends CustomTestCase
         $client->loginUser($user);
         $client->request('GET', '/tasks');
         $this->assertResponseIsSuccessful();
-        $this->markTestIncomplete();
         // @TODO: test whether the response ACTUALLY contains a list of tasks
-        // @TODO: ensure route is only accessible to logged in users
+        $this->assertSelectorExists('form[name="task"]');
+        $this->assertSelectorExists('input[id="task_title"]');
+        $this->assertSelectorExists('textarea[id="task_content"]');
+        $this->assertSelectorExists('button[type="submit"]');
     }
 
     public function testUserCanAccessTaskListViaALink(): void

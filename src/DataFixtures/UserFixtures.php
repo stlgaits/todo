@@ -35,6 +35,8 @@ class UserFixtures extends Fixture
 
         // Create 1 Admin User
         $admin = $this->addAdmin();
+        // Create anonymous User (default tasks will be assigned to them)
+        $anon = $this->addAnonymousUser();
         $manager->persist($admin);
 
         $manager->flush();
@@ -49,6 +51,17 @@ class UserFixtures extends Fixture
             ->setRoles(['ROLE_ADMIN']);
 
         return $admin;
+    }
+
+    public function addAnonymousUser(): User
+    {
+        $anon = new User();
+        $anon->setEmail("weareanonymous@email.com")
+            ->setUsername("fsociety")
+            ->setPassword("thisismyincredibleanonymouspassword")
+            ->setRoles(['ROLE_DISABLED']);
+
+        return $anon;
     }
 
     public static function getReferenceKey($key): string

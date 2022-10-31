@@ -5,15 +5,17 @@ declare(strict_types=1);
 namespace App\Tests\Entity;
 
 use App\Entity\Task;
+use App\Test\CustomTestCase;
 use DateTime;
+use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
+use Doctrine\ORM\EntityManagerInterface;
 use Faker\Provider\Lorem;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Validator\ConstraintViolation;
 
 /**
  * @covers Task
  */
-class TaskTest extends KernelTestCase
+final class TaskTest extends CustomTestCase
 {
     public function testItWorks(): void
     {
@@ -64,18 +66,30 @@ class TaskTest extends KernelTestCase
 
     public function testATaskShouldHaveAnAuthor(): void
     {
+        $em = $this->getEntityManager();
+
         $task = $this->createTaskObject();
-        $this->assertNotNull($task);
+        $author = $this->createUser("awesomeauthor", "thisisnotreallymypassword", "awesomeauthor@yahoo.com");
+        $task->setAuthor($author);
         $this->validateTask($task);
+        $em->persist($author);
+        $em->persist($task);
+        $em->flush();
+        $this->assertNotNull($task);
         $this->assertNotNull($task->getAuthor());
-//        $this->markTestIncomplete();
+        $this->assertSame($author, $task->getAuthor());
     }
 
-    public function testDefaultTasksShouldBeAssignedToAnonymousUser(): void
+    public function testCannotCreateTaskWithoutAuthor(): void
     {
-        $this->markTestIncomplete();
-    }
+        $this->expectException(NotNullConstraintViolationException::class);
+        $em = $this->getEntityManager();
+        $task = $this->createTaskObject();
+        $this->validateTask($task);
+        $em->persist($task);
+        $em->flush();
 
+    }
 
     /**
      * Ensures created Task matches validation constraints
@@ -90,6 +104,7 @@ class TaskTest extends KernelTestCase
             $validationErrors[] = $error->getPropertyPath() . ' ' . $error->getMessage();
         }
         $this->assertCount(0, $errors, implode(',', $validationErrors));
+        $this->assertInstanceOf(Task::class, $task);
     }
 
 
@@ -118,5 +133,13 @@ class TaskTest extends KernelTestCase
         $task->isDone(false);
         $this->validateTask($task);
         return $task;
+    }
+
+    /*
+     * @throws Exception
+     */
+    protected function getEntityManager(): EntityManagerInterface
+    {
+        return static::getContainer()->get('doctrine')->getManager();
     }
 }
