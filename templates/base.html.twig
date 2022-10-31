@@ -4,8 +4,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
+        <meta name="description" content="ToDoList - l'application qui vous simplifie la vie">
+        <meta name="author" content="ToDo & Co">
         <title>{% block title %}To Do List app{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
@@ -13,10 +13,10 @@
         {% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-light navbar-fixed-top" style="background-color: #e3f2fd;" role="navigation">
+        <nav class="navbar navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">To Do List app</a>
+                    <a class="navbar-brand" href="{{ path('homepage') }}">To Do List app</a>
 
                     <img src="{{absolute_url(asset('build/img/Logo_OpenClassrooms.png')) }}" alt="OpenClassrooms" />
                 </div>

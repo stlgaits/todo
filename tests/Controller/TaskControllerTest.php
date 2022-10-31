@@ -72,20 +72,16 @@ final class TaskControllerTest extends CustomTestCase
     {
         $client = $this->createClient();
         $user = $this->createUser("mario", "notluigi!", "mario.bros@nintendo.fr");
-//        $client->followRedirects();
         $client->loginUser($user);
 //        $session = $this->getContainer()->get('session');
         // @TODO: unsure why but so far mock logged-in user is actually redirected to login page when trying to
         // get /tasks/create
         $response = $client->request('GET', '/tasks/create');
-        $this->markTestIncomplete();
         $client->submitForm('Ajouter', [
             'task[title]' => 'Faire un truc cool',
             'task[content]' => 'Mais faut vraiment que ce soit archi cool quoi',
         ]);
         $task = $this->getEntityManager()->getRepository(Task::class)->findOneBy(['title' => 'Faire un truc cool']);
-//        $this->assertResponseStatusCodeSame(200);
-//        $this->assertResponseIsSuccessful();
         $this->assertResponseRedirects('task_list');
         $this->assertNotNull($task);
         $this->assertEquals("Mais faut vraiment que ce soit archi cool quoi", $task->getContent());
