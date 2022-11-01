@@ -25,6 +25,7 @@
                                 {% endif %}
                             </h4>
                             <h4><a class="text-decoration-none" href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a></h4>
+                            <span class="text-muted">{{ task.author }}</span>
                             <p>{{ task.content }}</p>
                         </div>
                         <div>

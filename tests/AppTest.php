@@ -7,7 +7,7 @@ namespace App\Tests;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers
+ * @coversNothing
  */
 final class AppTest extends TestCase
 {
