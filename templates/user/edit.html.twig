@@ -7,13 +7,13 @@
     <div class="row">
         <div class="col">
             <div class="card p-5 shadow">
-                {{ form_start(form, {'action' : path('user_edit', {'id' : user.id})}) }}
-                {{ form_row(form.username) }}
-                {{ form_row(form.email) }}
-                {{ form_row(form.roles) }}
-                {{ form_rest(form) }}
-                <button type="submit" class="btn btn-success">Modifier</button>
-                {{ form_end(form) }}
+                <div class="card-body">
+                    {{ form_start(form, {'action' : path('user_edit', {'id' : user.id})}) }}
+                    {{ form_row(form.username) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.roles) }}
+                    <button type="submit" class="btn btn-success">Modifier</button>
+                </div>
             </div>
         </div>
     </div>
