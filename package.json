@@ -25,6 +25,7 @@
     "dependencies": {
         "@popperjs/core": "^2.11.6",
         "bootstrap": "^5.2.2",
+        "bootstrap-icons": "^1.9.1",
         "docsify-cli": "^4.4.4"
     }
 }
