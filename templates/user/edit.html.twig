@@ -9,10 +9,9 @@
             <div class="card p-5 shadow">
                 <div class="card-body">
                     {{ form_start(form, {'action' : path('user_edit', {'id' : user.id})}) }}
-                    {{ form_row(form.username) }}
-                    {{ form_row(form.email) }}
-                    {{ form_row(form.roles) }}
+                    {{ form_widget(form) }}
                     <button type="submit" class="btn btn-success">Modifier</button>
+                    {{ form_end(form) }}
                 </div>
             </div>
         </div>

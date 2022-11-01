@@ -35,7 +35,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     /**
      * @ORM\Column(type="string", length=64, nullable=false)
      */
-    private string $password;
+    private ?string $password = null;
 
     /**
      * @ORM\Column(type="string", length=60, unique=true, nullable=false)
