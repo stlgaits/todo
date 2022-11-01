@@ -2,37 +2,56 @@
 
 {% block header_img %}{% endblock %}
 
-{% block header_title %}<h1>Liste des utilisateurs</h1>{% endblock %}
-
+{% block header_title %}
+    <div class="row mb-5">
+        <div class="col">
+            <h1 class="display-6">Liste des utilisateurs</h1>
+        </div>
+    </div>
+{% endblock %}
 {% block body %}
     {% if users|length == 0 %}
         <div class="alert alert-warning" role="alert">
-            Il n'y a pas encore d'utilisateur enregistré. <a href="{{ path('user_create') }}" class="btn btn-warning pull-right">Créer un utilisateur</a>
+            Il n'y a pas encore d'utilisateur enregistré. <a href="{{ path('user_create') }}" class="btn btn-warning" role="button">Créer un utilisateur</a>
         </div>
     {% else %}
         <div class="row">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nom d'utilisateur</th>
-                    <th>Adresse d'utilisateur</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for user in users %}
+            <div class="col">
+                <table class="table table-hover">
+                    <thead>
                     <tr>
-                        <th scope="row">{{ loop.index }}</th>
-                        <td>{{ user.username }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>
-                            <a href="{{ path('user_edit', {'id' : user.id}) }}" class="btn btn-success btn-sm">Edit</a>
-                        </td>
+                        <th>#</th>
+                        <th>Nom d'utilisateur/rice</th>
+                        <th>Adresse d'utilisateur/rice</th>
+                        <th>Rôles</th>
+                        <th>Actions</th>
                     </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <th scope="row">{{ loop.index }}</th>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                {% for role in  user.roles %}
+                                    {% if role == 'ROLE_ADMIN' %}
+                                        Administrateur/rice
+                                    {% elseif role == 'ROLE_SUPER_ADMIN' %}
+                                        Super-Admin
+                                    {% else %}
+                                        Utilisateur/rice
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td>
+                                <a href="{{ path('user_edit', {'id' : user.id}) }}" class="btn btn-success btn-sm" role="button">Edit</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     {% endif %}
 {% endblock %}

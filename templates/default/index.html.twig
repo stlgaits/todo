@@ -1,14 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block header_title %}
-    <h1>Bienvenue sur Todo List, l'application vous permettant de gérer l'ensemble de vos tâches sans effort !</h1>
+    <div class="row mb-5">
+        <div class="col">
+            <h1 class="display-6">Bienvenue sur Todo List, l'application vous permettant de gérer l'ensemble de vos tâches sans effort !</h1>
+        </div>
+    </div>
 {% endblock %}
 
 {% block body %}
 
     <div class="row">
-        <a href="{{ path('task_create') }}" class="btn btn-success">Créer une nouvelle tâche</a>
-        <a href="{{ path('task_list') }}" class="btn btn-info">Consulter la liste des tâches à faire</a>
-        <a href="" class="btn btn-secondary">Consulter la liste des tâches terminées</a>
+        {% if is_granted('ROLE_USER') %}
+            <div class="col text-end">
+                <a href="{{ path('task_create') }}" class="btn btn-success" role="button">Créer une nouvelle tâche</a>
+            </div>
+            <div class="col">
+                <a href="{{ path('task_list') }}" class="btn btn-outline-success" role="button">Consulter la liste des tâches</a>
+            </div>
+        {% else %}
+            Pour bénéficier des fonctionnalités ToDoList, veuillez vous connecter ou créer un compte.
+        {% endif %}
     </div>
 {% endblock %}
