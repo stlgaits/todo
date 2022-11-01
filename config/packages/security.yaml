@@ -38,13 +38,16 @@ security:
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER
+        # Ensures the 'Anonymous' User to which default tasks are allocated has lower access control privileges than an actual
+        # User to avoid someone trying to impersonate that User
+        ROLE_USER: ROLE_DISABLED
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
          - { path: ^/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/users, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+         - { path: ^/tasks, roles: ROLE_USER }
 
 when@test:
     security:

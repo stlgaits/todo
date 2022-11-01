@@ -6,7 +6,10 @@ namespace App\Controller;
 
 use App\Entity\Task;
 use App\Form\TaskType;
+use App\Repository\TaskRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,10 +17,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class TaskController extends AbstractController
 {
-    #[Route('/tasks', name: 'task_list')]
-    public function list(EntityManagerInterface $entityManager): Response
+    #[Route('/tasks', name: 'task_list', methods: ['GET'])]
+    public function list(TaskRepository $taskRepository): Response
     {
-        $tasks = $entityManager->getRepository(Task::class)->findAll();
+        $tasks = $taskRepository->findAll();
         return $this->render(
             'task/list.html.twig',
             [
@@ -26,8 +29,12 @@ class TaskController extends AbstractController
         );
     }
 
-    #[Route('/tasks/create', name: 'task_create')]
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
+    /**
+     * @throws OptimisticLockException
+     * @throws ORMException
+     */
+    #[Route('/tasks/create', name: 'task_create', methods: ['GET', 'POST'])]
+    public function create(Request $request, TaskRepository $taskRepository): Response
     {
         $task = new Task();
         $form = $this->createForm(TaskType::class, $task);
@@ -35,30 +42,34 @@ class TaskController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($task);
-            $entityManager->flush();
+            $task->setAuthor($this->getUser());
+            $taskRepository->add($task);
 
             $this->addFlash('success', 'La tâche a été bien été ajoutée.');
 
-            return $this->redirectToRoute('task_list');
+            return $this->redirectToRoute('task_list', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('task/create.html.twig', ['form' => $form]);
     }
 
-    #[Route('/tasks/{id}/edit', name: 'task_edit')]
-    public function edit(Task $task, Request $request, EntityManagerInterface $entityManager): Response
+    /**
+     * @throws OptimisticLockException
+     * @throws ORMException
+     */
+    #[Route('/tasks/{id}/edit', name: 'task_edit', methods: ['GET', 'POST'])]
+    public function edit(Task $task, Request $request, TaskRepository $taskRepository): Response
     {
         $form = $this->createForm(TaskType::class, $task);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $taskRepository->add($task);
 
             $this->addFlash('success', 'La tâche a bien été modifiée.');
 
-            return $this->redirectToRoute('task_list');
+            return $this->redirectToRoute('task_list', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('task/edit.html.twig', [
@@ -75,17 +86,20 @@ class TaskController extends AbstractController
 
         $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
 
-        return $this->redirectToRoute('task_list');
+        return $this->redirectToRoute('task_list', [], Response::HTTP_SEE_OTHER);
     }
 
+    /**
+     * @throws OptimisticLockException
+     * @throws ORMException
+     */
     #[Route('/tasks/{id}/delete', name: 'task_delete')]
-    public function deleteTask(Task $task, EntityManagerInterface $entityManager): Response
+    public function deleteTask(Task $task, TaskRepository $taskRepository): Response
     {
-        $entityManager->remove($task);
-        $entityManager->flush();
+        $taskRepository->remove($task);
 
         $this->addFlash('success', 'La tâche a bien été supprimée.');
 
-        return $this->redirectToRoute('task_list');
+        return $this->redirectToRoute('task_list', [], Response::HTTP_SEE_OTHER);
     }
 }

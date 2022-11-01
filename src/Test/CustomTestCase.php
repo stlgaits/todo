@@ -6,12 +6,14 @@ namespace App\Test;
 
 use App\Entity\Task;
 use App\Entity\User;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class CustomTestCase extends WebTestCase
 {
+    use RefreshDatabaseTrait;
+
     /*
     * @throws Exception
     */
@@ -54,12 +56,19 @@ class CustomTestCase extends WebTestCase
         return $task;
     }
 
-    protected function toggleTask(): void
+    protected function toggleTask(Task $task, bool $done): void
     {
+        $em = $this->getEntityManager();
+        $task->isDone($done);
+        $em->persist($task);
+        $em->flush();
     }
 
-    protected function deleteTask(): void
+    protected function deleteTask(Task $task): void
     {
+        $em = $this->getEntityManager();
+        $em->remove($task);
+        $em->flush();
     }
 
     protected function login(User $user): void

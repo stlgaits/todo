@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace App\Tests\Controller;
 
 use App\Test\CustomTestCase;
-use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 
 /**
  * @group security
  */
-class UserControllerTest extends CustomTestCase
+final class UserControllerTest extends CustomTestCase
 {
-    use RefreshDatabaseTrait;
-
     public function testOnlyAdminUsersCanAccessUsersListPage(): void
     {
         $client = $this->createClient();

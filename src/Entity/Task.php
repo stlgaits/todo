@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ORM\Table
  */
-class Task
+class Task implements \Stringable
 {
     /**
      * @ORM\Column(type="integer")
@@ -21,26 +21,32 @@ class Task
     private int $id;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=false)
      */
     private \Datetime $createdAt;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=false)
      * @Assert\NotBlank(message="Vous devez saisir un titre.")
      */
     private string $title;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=false)
      * @Assert\NotBlank(message="Vous devez saisir du contenu.")
      */
     private string $content;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=false)
      */
     private bool $isDone;
+
+    /**
+     * @ORM\ManyToOne(inversedBy="tasks", targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private User $author;
 
     public function __construct()
     {
@@ -58,9 +64,11 @@ class Task
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTime $createdAt): void
+    public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     public function getTitle(): string
@@ -68,9 +76,11 @@ class Task
         return $this->title;
     }
 
-    public function setTitle(string $title): void
+    public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
     }
 
     public function getContent(): string
@@ -78,9 +88,11 @@ class Task
         return $this->content;
     }
 
-    public function setContent(string $content): void
+    public function setContent(string $content): self
     {
         $this->content = $content;
+
+        return $this;
     }
 
     public function isDone(): bool
@@ -88,8 +100,27 @@ class Task
         return $this->isDone;
     }
 
-    public function toggle(bool $flag): void
+    public function toggle(bool $flag): self
     {
         $this->isDone = $flag;
+
+        return $this;
+    }
+
+    public function getAuthor(): User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(User $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->title;
     }
 }
