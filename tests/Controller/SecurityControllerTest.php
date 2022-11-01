@@ -12,7 +12,6 @@ use App\Test\CustomTestCase;
  */
 final class SecurityControllerTest extends CustomTestCase
 {
-
     public function testAnyoneCanAccessLoginForm(): void
     {
         $client = $this->createClient();

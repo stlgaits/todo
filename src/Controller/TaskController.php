@@ -15,7 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
-
 class TaskController extends AbstractController
 {
     #[Route('/tasks', name: 'task_list', methods: ['GET'])]
@@ -59,7 +58,7 @@ class TaskController extends AbstractController
      * @throws ORMException
      */
     #[Route('/tasks/{id}/edit', name: 'task_edit', methods: ['GET', 'POST'])]
-    public function edit(Task $task, Request $request,  TaskRepository $taskRepository): Response
+    public function edit(Task $task, Request $request, TaskRepository $taskRepository): Response
     {
         $form = $this->createForm(TaskType::class, $task);
 

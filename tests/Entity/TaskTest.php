@@ -88,7 +88,6 @@ final class TaskTest extends CustomTestCase
         $this->validateTask($task);
         $em->persist($task);
         $em->flush();
-
     }
 
     /**

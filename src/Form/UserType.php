@@ -40,31 +40,30 @@ class UserType extends AbstractType
                 'second_options' => ['label' => 'Tapez le mot de passe à nouveau'],
             ])
             ->add('email', EmailType::class, ['label' => 'Adresse email']);
-            if ($this->accessControl->isGranted('ROLE_ADMIN')) {
-                $builder->add('roles', ChoiceType::class, [
-                    'label' => 'Rôle',
-                    'choices' => [
-                        'Utilisateur/rice' => 'ROLE_USER',
-                        'Administrateur/rice' => 'ROLE_ADMIN'
-                    ],
-                ]);
-                $builder->get('roles')->addModelTransformer(new CallbackTransformer(
-                    function ($rolesArray) {
-                        if(in_array('ROLE_ADMIN', $rolesArray)){
-                            return 'ROLE_ADMIN';
-                        }
-                        return 'ROLE_USER';
-                    },
-                    function ($rolesString) {
-                        return [$rolesString];
+        if ($this->accessControl->isGranted('ROLE_ADMIN')) {
+            $builder->add('roles', ChoiceType::class, [
+                'label' => 'Rôle',
+                'choices' => [
+                    'Utilisateur/rice' => 'ROLE_USER',
+                    'Administrateur/rice' => 'ROLE_ADMIN'
+                ],
+            ]);
+            $builder->get('roles')->addModelTransformer(new CallbackTransformer(
+                function ($rolesArray) {
+                    if (in_array('ROLE_ADMIN', $rolesArray)) {
+                        return 'ROLE_ADMIN';
                     }
-                ));
-                $builder->addEventListener(
-                    FormEvents::PRE_SET_DATA,
-                    [$this, 'onPostSetData']
-                );
-
-            }
+                    return 'ROLE_USER';
+                },
+                function ($rolesString) {
+                    return [$rolesString];
+                }
+            ));
+            $builder->addEventListener(
+                FormEvents::PRE_SET_DATA,
+                [$this, 'onPostSetData']
+            );
+        }
     }
 
     public function onPostSetData(FormEvent $event): void
@@ -72,8 +71,8 @@ class UserType extends AbstractType
         $form = $event->getForm();
         $data = $event->getData();
         if ($data) {
-            if($data instanceof User){
-                if($data->getPassword() === null){
+            if ($data instanceof User) {
+                if ($data->getPassword() === null) {
                     return;
                 }
             }

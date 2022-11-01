@@ -9,19 +9,20 @@
 {% endblock %}
 
 {% block body %}
-
-    <div class="row justify-content-center text-center d-grid g-3">
-        {% if is_granted('ROLE_USER') %}
-            <div class="col">
-                <a href="{{ path('task_create') }}" class="btn btn-success rounded-pill" role="button">Créer une nouvelle tâche</a>
-            </div>
-            <div class="col">
-                <a href="{{ path('task_list') }}" class="btn btn-warning rounded-pill" role="button">Consulter la liste des tâches</a>
-            </div>
-        {% else %}
-            <div class="col-lg-6">
-                <p class="lead">Pour bénéficier des fonctionnalités ToDoList, veuillez vous connecter ou demander à l'administrateur de vous créer un compte.</p>
-            </div>
-        {% endif %}
+    <div class="container-fluid px-2">
+        <div class="row justify-content-center d-grid g-3 mb-5">
+            {% if is_granted('ROLE_USER') %}
+                <div class="col">
+                    <a href="{{ path('task_create') }}" class="btn btn-success rounded-pill text-center" role="button">Créer une nouvelle tâche</a>
+                </div>
+                <div class="col">
+                    <a href="{{ path('task_list') }}" class="btn btn-warning rounded-pill text-center" role="button">Consulter la liste des tâches</a>
+                </div>
+            {% else %}
+                <div class="col">
+                    <p class="lead">Pour bénéficier des fonctionnalités ToDoList, veuillez vous connecter ou demander à l'administrateur de vous créer un compte.</p>
+                </div>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}

@@ -12,7 +12,6 @@ use App\Test\CustomTestCase;
  */
 final class TaskControllerTest extends CustomTestCase
 {
-
     public function testUserCanReadTasksList(): void
     {
         $client = $this->createClient();
@@ -29,7 +28,7 @@ final class TaskControllerTest extends CustomTestCase
 
     public function testUserCanAccessTaskListViaALink(): void
     {
-            $this->markTestIncomplete();
+        $this->markTestIncomplete();
     }
 
     public function testCannotAccessTasksListAnonymously(): void
