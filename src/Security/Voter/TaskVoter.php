@@ -2,23 +2,33 @@
 
 namespace App\Security\Voter;
 
+use App\Entity\Task;
+use Exception;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class TaskVoter extends Voter
 {
-    public const EDIT = 'POST_EDIT';
-    public const VIEW = 'POST_VIEW';
+    public const DELETE = 'TASK_DELETE';
+
+    private Security $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
 
     protected function supports(string $attribute, $subject): bool
     {
-        // replace with your own logic
-        // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, [self::EDIT, self::VIEW])
-            && $subject instanceof \App\Entity\Task;
+        return $attribute == self::DELETE
+            && $subject instanceof Task;
     }
 
+    /**
+     * @throws Exception
+     */
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
@@ -27,18 +37,20 @@ class TaskVoter extends Voter
             return false;
         }
 
-        // ... (check conditions and return true to grant permission) ...
-        switch ($attribute) {
-            case self::EDIT:
-                // logic to determine if the user can EDIT
-                // return true or false
-                break;
-            case self::VIEW:
-                // logic to determine if the user can VIEW
-                // return true or false
-                break;
+        /** @var Task $subject */
+
+        if ($attribute == self::DELETE) {
+            // User can delete their own tasks
+            if ($user === $subject->getAuthor()) {
+                return true;
+            }
+            // Admin Users can delete tasks that are attributed to the "Anonymous" User (fixtures)
+            if ($this->security->isGranted('ROLE_ADMIN') && $subject->getAuthor()->getUsername() === 'anonymous') {
+                return true;
+            }
+            return false;
         }
 
-        return false;
+        throw new Exception(sprintf('Unhandled attribute "%s"', $attribute));
     }
 }
