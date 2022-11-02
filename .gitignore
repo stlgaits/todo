@@ -9,8 +9,8 @@
 ###< symfony/framework-bundle ###
 
 ###> IDEs ###
-.vscode/
-.idea/
+.vscode/*
+.idea/*
 ###< IDEs ###
 
 ###> symfony/webpack-encore-bundle ###
@@ -36,10 +36,12 @@ yarn-error.log
 ###> friendsofphp/php-cs-fixer ###
 /.php-cs-fixer.php
 /.php-cs-fixer.cache
-/tools/php-cs-fixer/vendor/
+/tools/php-cs-fixer/vendor/*
 ###< friendsofphp/php-cs-fixer ###
 
 /migrations/
 
-.phive/
+.phive/*
 phive.phar.asc
+.codacy-coverage/13.11.3
+.phpunit.cache/*
