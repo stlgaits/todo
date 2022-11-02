@@ -95,7 +95,7 @@ class TaskController extends AbstractController
      * @throws ORMException
      */
     #[Route('/tasks/{id}/delete', name: 'task_delete')]
-    #[IsGranted('TASK_DELETE')]
+    #[IsGranted('TASK_DELETE', subject: 'task')]
     public function deleteTask(Task $task, TaskRepository $taskRepository): Response
     {
         $taskRepository->remove($task);
