@@ -13,7 +13,7 @@ class TaskFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
-        $anonymousAuthor = $this->getReference(UserFixtures::getReferenceKey('user_fsociety'));
+        $anonymousAuthor = $this->getReference(UserFixtures::getReferenceKey('fsociety'));
         for ($i = 0 ; $i < 15 ; $i++) {
             $createdAt = $faker->dateTimeThisDecade();
             $task = new Task();
