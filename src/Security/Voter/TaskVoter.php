@@ -45,7 +45,7 @@ class TaskVoter extends Voter
                 return true;
             }
             // Admin Users can delete tasks that are attributed to the "Anonymous" User (fixtures)
-            if ($this->security->isGranted('ROLE_ADMIN') && $subject->getAuthor()->getUsername() === 'anonymous') {
+            if ($this->security->isGranted('ROLE_ADMIN') && $subject->getAuthor()->getUsername() === 'fsociety') {
                 return true;
             }
             return false;

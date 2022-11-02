@@ -106,7 +106,7 @@ final class TaskControllerTest extends CustomTestCase
             'task[content]' => 'Mais faut vraiment que ce soit pas non plus trop cool quoi',
         ]);
         $this->assertNotNull($task);
-        $this->assertSelectorTextSame("div[class=alert-success]","<strong>Superbe !</strong> La tâche a bien été modifiée.");
+        $this->assertSelectorTextSame("div[class=alert-success]", "<strong>Superbe !</strong> La tâche a bien été modifiée.");
         $this->assertSame($user1, $task->getAuthor());
         $this->assertResponseRedirects('task_list');
     }

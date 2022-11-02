@@ -61,6 +61,7 @@ class UserFixtures extends Fixture
             ->setPassword("thisismyincredibleanonymouspassword")
             ->setRoles(['ROLE_DISABLED']);
 
+        $this->addReference(self::getReferenceKey('fsociety'), $anon);
         return $anon;
     }
 
