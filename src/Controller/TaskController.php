@@ -45,7 +45,7 @@ class TaskController extends AbstractController
             $task->setAuthor($this->getUser());
             $taskRepository->add($task);
 
-            $this->addFlash('success', 'La tâche a été bien été ajoutée.');
+            $this->addFlash('success', sprintf('La tâche %s a été bien été ajoutée.', $task->getTitle()));
 
             return $this->redirectToRoute('task_list', [], Response::HTTP_SEE_OTHER);
         }
