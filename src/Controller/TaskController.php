@@ -10,6 +10,7 @@ use App\Repository\TaskRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,7 +21,7 @@ class TaskController extends AbstractController
     #[Route('/tasks', name: 'task_list', methods: ['GET'])]
     public function list(TaskRepository $taskRepository): Response
     {
-        $tasks = $taskRepository->findAll();
+        $tasks = $taskRepository->orderByStatus();
         return $this->render(
             'task/list.html.twig',
             [
@@ -45,7 +46,7 @@ class TaskController extends AbstractController
             $task->setAuthor($this->getUser());
             $taskRepository->add($task);
 
-            $this->addFlash('success', 'La tâche a été bien été ajoutée.');
+            $this->addFlash('success', sprintf('La tâche %s a été bien été ajoutée.', $task->getTitle()));
 
             return $this->redirectToRoute('task_list', [], Response::HTTP_SEE_OTHER);
         }
@@ -94,6 +95,7 @@ class TaskController extends AbstractController
      * @throws ORMException
      */
     #[Route('/tasks/{id}/delete', name: 'task_delete')]
+    #[IsGranted('TASK_DELETE', subject: 'task')]
     public function deleteTask(Task $task, TaskRepository $taskRepository): Response
     {
         $taskRepository->remove($task);

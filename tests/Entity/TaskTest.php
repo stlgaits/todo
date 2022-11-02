@@ -80,6 +80,7 @@ final class TaskTest extends CustomTestCase
         $this->assertSame($author, $task->getAuthor());
     }
 
+
     public function testCannotCreateTaskWithoutAuthor(): void
     {
         $this->expectException(NotNullConstraintViolationException::class);

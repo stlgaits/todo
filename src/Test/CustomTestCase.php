@@ -32,7 +32,7 @@ class CustomTestCase extends WebTestCase
         $user->setUsername($username);
         $encoded = $container->get('security.password_hasher')->hashPassword($user, $password);
         $user->setPassword($encoded);
-
+        $user->setRoles(["ROLE_USER"]);
         $em->persist($user);
         $em->flush();
 
@@ -50,9 +50,16 @@ class CustomTestCase extends WebTestCase
         return $user;
     }
 
-    protected function createTask(): Task
+    protected function createTask(string $title, string $content, User $author): Task
     {
+        $em = $this->getEntityManager();
         $task = new Task();
+        $task->setTitle($title);
+        $task->setContent($content);
+        $task->setAuthor($author);
+        $em->persist($task);
+        $em->flush();
+
         return $task;
     }
 
@@ -73,7 +80,7 @@ class CustomTestCase extends WebTestCase
 
     protected function login(User $user): void
     {
-        $client = static::createClient();
+        $client = $this->createClient();
         $client->loginUser($user);
     }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Controller;
 
 use App\Entity\Task;
+use App\Entity\User;
 use App\Test\CustomTestCase;
 
 /**
@@ -70,31 +71,44 @@ final class TaskControllerTest extends CustomTestCase
     public function testUserCanCreateNewTask(): void
     {
         $client = $this->createClient();
+        $client->followRedirects();
         $user = $this->createUser("mario", "notluigi!", "mario.bros@nintendo.fr");
         $client->loginUser($user);
-//        $session = $this->getContainer()->get('session');
         // @TODO: unsure why but so far mock logged-in user is actually redirected to login page when trying to
         // get /tasks/create
-        $response = $client->request('GET', '/tasks/create');
+        $client->request('GET', '/tasks/create');
         $client->submitForm('Ajouter', [
             'task[title]' => 'Faire un truc cool',
             'task[content]' => 'Mais faut vraiment que ce soit archi cool quoi',
         ]);
         $task = $this->getEntityManager()->getRepository(Task::class)->findOneBy(['title' => 'Faire un truc cool']);
-        $this->assertResponseRedirects('task_list');
         $this->assertNotNull($task);
         $this->assertEquals("Mais faut vraiment que ce soit archi cool quoi", $task->getContent());
         $this->assertFalse($task->isDone());
+        $this->assertSame($user, $task->getAuthor());
+        $this->assertResponseRedirects('task_list');
+        $this->markTestIncomplete();
     }
 
-    public function testTaskAuthorIsSetToCurrentUserWhenCreated(): void
-    {
-        $this->markTestSkipped();
-    }
 
     public function testCannotEditTaskAuthor(): void
     {
-        $this->markTestSkipped();
+        $client = $this->createClient();
+        $client->followRedirects();
+        $user1 = $this->createUser("mario1", "notluigi1!", "mario1.bros@nintendo.fr");
+        $user2 = $this->createUser("sophie", "bonsoir!", "sophie.marceau@nintendo.fr");
+        $task = $this->createTask("Defeat enemies", "While not forgetting to save the princess", $user1);
+        $taskId = $task->getId();
+        $client->loginUser($user2);
+        $client->request("GET", "/tasks/$taskId/edit");
+        $client->submitForm('Modifier', [
+            'task[title]' => 'Faire un truc assez cool',
+            'task[content]' => 'Mais faut vraiment que ce soit pas non plus trop cool quoi',
+        ]);
+        $this->assertNotNull($task);
+        $this->assertSelectorTextSame("div[class=alert-success]", "<strong>Superbe !</strong> La tâche a bien été modifiée.");
+        $this->assertSame($user1, $task->getAuthor());
+        $this->assertResponseRedirects('task_list');
     }
 
     public function testOnlyAdminUserCanDeleteDefaultTasks(): void
