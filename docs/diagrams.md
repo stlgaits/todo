@@ -14,11 +14,7 @@
 
 ![use case diagram for ToDo&co](/diagrams/use_case.png)
 
-![use case puml diagram for ToDo&co](/diagrams/use_case_puml.png)
-
 ## Sequence diagrams
-
-![registration sequence diagram for ToDo&co](/diagrams/sequence_registration.png)
 
 ![login sequence diagram for ToDo&co](/diagrams/sequence_login.png)
 
