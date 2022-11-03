@@ -1,0 +1,65 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+@startuml
+'https://plantuml.com/use-case-diagram
+left to right direction
+
+:Admin: as Admin
+:User: as User
+note left of Admin
+The app must have at least
+1 admin User in order to be
+able to add more users.
+end note
+User <|- Admin
+
+package Authentication {
+    (Authenticate) as (Auth)
+    note right of (Auth)
+    Authentication is required to
+    use all parts of the app except
+    the homepage
+    end note
+}
+rectangle ToDoList {
+    ToDoList .> Authentication : include
+
+    (Toggle a Task) as (TOGGLE Task)
+    (List Tasks) as (GET Tasks)
+    (View Task details) as (GET Task)
+    (Delete own Task) as (DELETE Task)
+    (Delete anonymous Task) as (DELETE Anon Task)
+    (List Users) as (GET Users)
+    (Add a User) as (CREATE User)
+    (Delete a User) as (DELETE User)
+    (Update a User's info) as (UPDATE User)
+    (Promote a User) as (PROMOTE User)
+    (Demote a User) as (DEMOTE User)
+    (UPDATE User) <|- (PROMOTE User)
+    (UPDATE User) <|- (DEMOTE User)
+
+    Admin -->  (DELETE Anon Task)
+    Admin -->  (GET Users)
+    Admin --> (DELETE User)
+    Admin --> (CREATE User)
+    Admin --> (UPDATE User)
+    Admin --> (PROMOTE User)
+    Admin --> (DEMOTE User)
+
+    User -->  (GET Tasks)
+    User -->  (TOGGLE Task)
+    User -->  (GET Task)
+    User -->  (DELETE Task)
+
+    note right of (CREATE User)
+    Users cannot register
+    themselves on the app,
+    their account must be
+    created by an admin first.
+    end note
+}
+
+
+
+@enduml

@@ -1,17 +1,33 @@
 {% extends 'base.html.twig' %}
-
+   {% block header_title %}
+       <div class="row text-center">
+           <div class="col-lg-12">
+               <h1>Connexion</h1>
+           </div>
+       </div>
+   {% endblock %}
 {% block body %}
     {% if error %}
         <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
-
-    <form action="{{ path('login_check') }}" method="post">
-        <label for="username">Nom d'utilisateur :</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" />
-
-        <label for="password">Mot de passe :</label>
-        <input type="password" id="password" name="_password" />
-
-        <button class="btn btn-success" type="submit">Se connecter</button>
-    </form>
+    <div class="row justify-content-center">
+        <div class="col-lg-4 card p-5 shadow-lg border-0">
+            <form action="{{ path('login') }}" method="post">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Nom d'utilisateur :</label>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" />
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="form-label">Mot de passe :</label>
+                    <input type="password" id="password" name="_password" class="form-control" />
+                </div>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                {# If you want to control the URL the user is redirected to on success #}
+                <input type="hidden" name="_target_path" value="{{ path('homepage') }}"/>
+                <div class="d-grid mt-2">
+                    <button class="btn btn-danger text-white rounded-pill" type="submit">Se connecter</button>
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock %}

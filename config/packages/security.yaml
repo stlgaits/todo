@@ -3,28 +3,51 @@ security:
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+        App\Entity\User:
+            algorithm: auto
+
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
         users_in_memory: { memory: null }
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: username
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             lazy: true
-            provider: users_in_memory
+            provider: app_user_provider
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
-
+            form_login:
+                login_path: login
+                check_path: login
+                enable_csrf: true
+                default_target_path: homepage
+            login_throttling:
+                max_attempts: 3
+            logout:
+                path: logout
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+        # Ensures the 'Anonymous' User to which default tasks are allocated has lower access control privileges than an actual
+        # User to avoid someone trying to impersonate that User
+        ROLE_USER: ROLE_DISABLED
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+         - { path: ^/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/users, roles: ROLE_ADMIN }
+         - { path: ^/tasks, roles: ROLE_USER }
 
 when@test:
     security:

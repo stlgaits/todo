@@ -1,14 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block header_title %}<h1>Créer un utilisateur</h1>{% endblock %}
-{% block header_img %}{% endblock %}
-
+{% block header_title %}<h1 class="text-center">Créer un utilisateur</h1>{% endblock %}
 {% block body %}
-    <div class="row">
-        {{ form_start(form, {'action' : path('user_create')}) }}
-            {{ form_widget(form) }}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 card shadow-lg p-5 mb-5 border-0">
+                {{ form_start(form, {'action' : path('user_create')}) }}
+                {{ form_widget(form) }}
 
-            <button type="submit" class="btn btn-success pull-right">Ajouter</button>
-        {{ form_end(form) }}
+                <button type="submit" class="btn btn-success rounded-pill">Ajouter</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
     </div>
 {% endblock %}
