@@ -18,7 +18,7 @@ unit-testing, profiling & making improvements to an existing to-do list app buil
 
 [![Estelle's GitHub stats](https://github-readme-stats.vercel.app/api?username=EstelleMyddleware&show_icons=true&theme=tokyonight)](https://github.com/EstelleMyddleware/github-readme-stats)
 
-You can view the detailed documentation of this project [here](https://estellemyddleware.github.io/todo/)
+You can view the detailed documentation of this project [here](https://stlgaits.github.io/todo/)
 
 ## Installation
 
