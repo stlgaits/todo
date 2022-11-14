@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor "Admin User" as Admin
+participant ToDoList as "ToDoList app"
+database Database as "ToDoList Database"
+
+ref over ToDoList, Admin
+  Authentication
+end ref
+
+Admin -> ToDoList: Create user page
+ToDoList --> Admin: Create user page
+Admin -> ToDoList: Create user form (username, password, email, role)
+ToDoList -> Database: Create user  (username, password, email, role)
+Database -> Database: Create user  (username, password, email, role)
+Database --> ToDoList: Success
+ToDoList --> Admin: Successfully created user message
+
+@enduml
