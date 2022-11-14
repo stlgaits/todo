@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor "Admin User" as Admin
+participant ToDoList as "ToDoList app"
+database Database as "ToDoList Database"
+
+ref over ToDoList, Admin
+  Authentication
+end ref
+
+Admin -> ToDoList: Edit user (id)
+ToDoList --> Admin: Edit user form view
+Admin -> ToDoList: Edit user form (username, email, role)
+ToDoList -> Database: Edit user  (username, email, role)
+Database -> Database: Edit user  (username, email, role)
+Database --> ToDoList: Success
+ToDoList --> Admin: Successfully edited user message
+
+@enduml
