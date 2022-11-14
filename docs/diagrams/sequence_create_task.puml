@@ -1,0 +1,37 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor User
+participant ToDoList as "ToDoList app"
+database Database as "ToDoList Database"
+
+ref over ToDoList, User
+  Authentication
+end ref
+
+User -> ToDoList: Homepage
+ToDoList --> User: Homepage
+User -> ToDoList: Login page
+ToDoList --> User:Login form
+User -> ToDoList: Authentication Request (username, plain password)
+ToDoList -> Database: Find matching user credentials (username, plain password)
+
+
+alt invalid credentials
+    Database --> ToDoList: null
+    ToDoList --> User: Invalid credentials, access denied
+    loop not authenticated
+        User -> ToDoList: Another authentication Request (username, plain password)
+        ToDoList -> Database: Find matching user credentials (username, plain password)
+        Database --> ToDoList: null
+        User <-- ToDoList: another authentication Response with error message
+    end
+else valid credentials
+    Database --> ToDoList: User
+    ToDoList --> ToDoList: Init User session
+    ToDoList --> User: Authentication Response - App homepage
+end
+
+@enduml

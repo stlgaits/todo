@@ -23,3 +23,7 @@
 ![delete task diagram for ToDo&co](/diagrams/sequence_delete_task.png)
 
 ![update task diagram for ToDo&co](/diagrams/sequence_update_task.png)
+
+![toggle task diagram for ToDo&co](/diagrams/sequence_toggle_task.png)
+
+![update user diagram for ToDo&co](/diagrams/sequence_update_user.png)
