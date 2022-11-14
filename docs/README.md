@@ -12,7 +12,7 @@
 [![docsify](https://img.shields.io/badge/documented%20with-docsify-cc00ff.svg)](https://docsify.js.org/)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/def1dc4a68e847998365282ad9e8b3ee)](https://www.codacy.com/gh/EstelleMyddleware/todo/dashboard?utm_source=github.com&utm_medium=referral&utm_content=EstelleMyddleware/todo&utm_campaign=Badge_Coverage)
 
-:mega::mega::mega: **You can view the detailed documentation of this project [here](https://stlgaits.github.io/todo/)** :mega::mega::mega:
+:mega::mega::mega: **You can view the detailed documentation & UML diagrams of this project [here](https://stlgaits.github.io/todo/)** :mega::mega::mega:
 
 !> This project is part of the Openclassrooms PHP / Symfony Apps Developer training course. It consists in auditing, 
 unit-testing, profiling & making improvements to an existing to-do list app built in Symfony 3.1 
