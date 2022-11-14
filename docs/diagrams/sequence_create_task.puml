@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor User
+participant ToDoList as "ToDoList app"
+database Database as "ToDoList Database"
+
+ref over ToDoList, User
+  Authentication
+end ref
+
+User -> ToDoList: Create Task page
+ToDoList --> User: Create Task page
+User -> ToDoList: Create task form (title, content)
+ToDoList -> Database: Create task (title, content)
+Database --> ToDoList: Success
+ToDoList --> User: Successfully created task message
+
+@enduml

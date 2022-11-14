@@ -16,10 +16,30 @@
 
 ## Sequence diagrams
 
+### Authentication
+
 ![login sequence diagram for ToDo&co](/diagrams/sequence_login.png)
+
+### Create a task
 
 ![create task sequence diagram for ToDo&co](/diagrams/sequence_create_task.png)
 
+### Toggle a task
+
+![toggle task diagram for ToDo&co](/diagrams/sequence_toggle_task.png)
+
+### Delete a task
+
 ![delete task diagram for ToDo&co](/diagrams/sequence_delete_task.png)
 
-![update task diagram for ToDo&co](/diagrams/sequence_update_task.png)
+### Create a user
+
+![create user diagram for ToDo&co](/diagrams/sequence_create_user.png)
+
+### Edit a user
+
+![update user diagram for ToDo&co](/diagrams/sequence_edit_user.png)
+
+
+[//]: # (![update task diagram for ToDo&co]&#40;/diagrams/sequence_update_task.png&#41;)
+
