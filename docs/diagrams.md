@@ -43,7 +43,3 @@
 
 [//]: # (![update task diagram for ToDo&co]&#40;/diagrams/sequence_update_task.png&#41;)
 
-
-
-
-
