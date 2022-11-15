@@ -25,11 +25,15 @@ final class TaskControllerTest extends CustomTestCase
     public function testUserCanAccessTaskListViaALink(): void
     {
         $client = $this->createClient();
-        $user = $this->createUser("louis", "notbianca", "louis@disney.fr");
+        $user = $this->getEntityManager()->getRepository(User::class)->find(1);
         $client->loginUser($user);
         $client->request('GET', '/');
         $client->clickLink("Consulter la liste des tâches");
-        $this->assertResponseRedirects("/tasks", 302);
+        $this->assertResponseIsSuccessful();
+        $this->assertSame("http://localhost/tasks", $client->getCrawler()->getBaseHref());
+        $this->assertSame("http://localhost/tasks", $client->getCrawler()->getUri());
+        $this->assertSelectorTextContains("button", "Marquer comme faite");
+        $this->assertSelectorTextContains("button", "Supprimer");
     }
 
     public function testCannotAccessTasksListAnonymously(): void
@@ -93,23 +97,28 @@ final class TaskControllerTest extends CustomTestCase
     public function testCannotEditTaskAuthor(): void
     {
         $client = $this->createClient();
-        $user1 = $this->createUser("mario1", "notluigi1!", "mario1.bros@nintendo.fr");
-        $user2 = $this->createUser("sophie", "bonsoir!", "sophie.marceau@nintendo.fr");
-        $task = $this->createTask("Defeat enemies", "While not forgetting to save the princess", $user1);
+        $user1 = $this->getEntityManager()->getRepository(User::class)->find(1);
+        $user2 = $this->getEntityManager()->getRepository(User::class)->find(2);
+        $task = $this->getEntityManager()->getRepository(Task::class)->find(1);
         $taskId = $task->getId();
-        $client->loginUser($user2);
-        $client->followRedirects();
+        $taskAuthor = $task->getAuthor();
+        // I haven't found a better way yet to ensure we don't log in  the same user as the task's author given that
+        // the tasks & user fixtures are generated at random and therefore we can't predict a task's author
+        if($taskAuthor === $user2){
+            $client->loginUser($user1);
+        } else {
+            $client->loginUser($user2);
+        }
         $client->request("GET", "/tasks/$taskId/edit");
-        $client->submitForm('Modifier', [
+        $response = $client->submitForm('Modifier', [
             'task[title]' => 'Faire un truc assez cool',
             'task[content]' => 'Mais faut vraiment que ce soit pas non plus trop cool quoi',
         ]);
         $client->followRedirects();
         $this->assertNotNull($task);
-        $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextSame("div[class=alert-success]", "<strong>Superbe !</strong> La tâche a bien été modifiée.");
-        $this->assertSame($user1, $task->getAuthor());
-        $this->assertResponseRedirects('task_list');
+        $this->assertSame($taskAuthor, $task->getAuthor());
+        $this->assertResponseRedirects('/tasks', 303);
+//        $this->assertSelectorTextSame("div[class=alert-success]", "<strong>Superbe !</strong> La tâche a bien été modifiée.");
     }
 
     public function testOnlyAdminUserCanDeleteDefaultTasks(): void
