@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor User
+participant ToDoList as "ToDoList app"
+database Database as "ToDoList Database"
+
+ref over ToDoList, User
+  Authentication
+end ref
+
+User -> ToDoList: Toggle task
+
+ToDoList -> Database: Toggle task (done status)
+
+Database --> ToDoList: Success (task done status)
+ToDoList --> User: Successfully updated task isDone status message
+
+@enduml

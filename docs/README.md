@@ -15,6 +15,8 @@
 unit-testing, profiling & making improvements to an existing to-do list app built in Symfony 3.1 
 (available [here](https://github.com/saro0h/projet8-TodoList)).
 
+[![Estelle's GitHub stats](https://github-readme-stats.vercel.app/api?username=EstelleMyddleware&show_icons=true&theme=tokyonight)](https://github.com/EstelleMyddleware/github-readme-stats)
+
 You can view the detailed documentation of this project [here](https://estellemyddleware.github.io/todo/)
 
 ## Installation

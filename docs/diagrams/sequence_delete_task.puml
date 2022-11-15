@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor User
+participant ToDoList as "ToDoList app"
+database Database as "ToDoList Database"
+
+ref over ToDoList, User
+  Authentication
+end ref
+
+User -> ToDoList: Delete task
+ToDoList -> ToDoList : is current User allowed to delete task?
+alt user is task's author OR user has ROLE_ADMIN && task is anonymous
+    ToDoList -> Database: Delete task
+    Database -> Database: Remove task
+    Database --> ToDoList: Success
+    ToDoList --> User: Successfully deleted task
+else
+    ToDoList --> User: 403 Forbidden
+end
+
+@enduml

@@ -46,15 +46,17 @@ final class SecurityControllerTest extends CustomTestCase
     public function testCannotLoginWithInvalidCredentials(): void
     {
         $client = static::createClient();
-        $user = $this->createUser("mary", "mypassword", "mary.funky@gmail.com");
-        $crawler = $client->request('GET', '/login');
+        $this->createUser("mary", "mypassword", "mary.funky@gmail.com");
+        $client->request('GET', '/login');
         $client->submitForm('Se connecter', [
             '_username' => 'emily',
             '_password' => 'mypassword',
         ]);
-        $this->assertResponseStatusCodeSame(302);
+        $client->followRedirect();
+//        $this->assertResponseStatusCodeSame(302);
+        $this->assertSelectorExists('.alert.alert-danger');
         // @TODO: how can we test User Session to check that current user is indeed our test user
-        $this->markTestIncomplete();
+//        $this->markTestIncomplete();
     }
 
 
