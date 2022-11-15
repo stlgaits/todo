@@ -33,7 +33,6 @@ final class TaskControllerTest extends CustomTestCase
         $this->assertSame("http://localhost/tasks", $client->getCrawler()->getBaseHref());
         $this->assertSame("http://localhost/tasks", $client->getCrawler()->getUri());
         $this->assertSelectorTextContains("button", "Marquer comme faite");
-        $this->assertSelectorTextContains("button", "Supprimer");
     }
 
     public function testCannotAccessTasksListAnonymously(): void
@@ -75,10 +74,8 @@ final class TaskControllerTest extends CustomTestCase
     {
         $client = $this->createClient();
         $client->followRedirects();
-        $user = $this->createUser("mario", "notluigi!", "mario.bros@nintendo.fr");
+        $user = $this->getEntityManager()->getRepository(User::class)->find(1);
         $client->loginUser($user);
-        // @TODO: unsure why but so far mock logged-in user is actually redirected to login page when trying to
-        // get /tasks/create
         $client->request('GET', '/tasks/create');
         $client->submitForm('Ajouter', [
             'task[title]' => 'Faire un truc cool',
@@ -88,9 +85,9 @@ final class TaskControllerTest extends CustomTestCase
         $this->assertNotNull($task);
         $this->assertEquals("Mais faut vraiment que ce soit archi cool quoi", $task->getContent());
         $this->assertFalse($task->isDone());
-        $this->assertSame($user, $task->getAuthor());
-        $this->assertResponseRedirects('task_list');
-        $this->markTestIncomplete();
+        $this->assertEquals($user->getEmail(), $task->getAuthor()->getEmail());
+        $this->assertResponseIsSuccessful();
+        $this->assertSame("http://localhost/tasks", $client->getCrawler()->getUri());
     }
 
 
