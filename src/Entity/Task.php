@@ -40,7 +40,7 @@ class Task implements \Stringable
     /**
      * @ORM\Column(type="boolean", nullable=false)
      */
-    private bool $isDone;
+    private bool $isDone = false;
 
     /**
      * @ORM\ManyToOne(inversedBy="tasks", targetEntity="App\Entity\User")

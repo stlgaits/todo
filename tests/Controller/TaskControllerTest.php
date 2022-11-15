@@ -20,16 +20,16 @@ final class TaskControllerTest extends CustomTestCase
         $client->loginUser($user);
         $client->request('GET', '/tasks');
         $this->assertResponseIsSuccessful();
-        // @TODO: test whether the response ACTUALLY contains a list of tasks
-        $this->assertSelectorExists('form[name="task"]');
-        $this->assertSelectorExists('input[id="task_title"]');
-        $this->assertSelectorExists('textarea[id="task_content"]');
-        $this->assertSelectorExists('button[type="submit"]');
     }
 
     public function testUserCanAccessTaskListViaALink(): void
     {
-        $this->markTestIncomplete();
+        $client = $this->createClient();
+        $user = $this->createUser("louis", "notbianca", "louis@disney.fr");
+        $client->loginUser($user);
+        $client->request('GET', '/');
+        $client->clickLink("Consulter la liste des tâches");
+        $this->assertResponseRedirects("/tasks", 302);
     }
 
     public function testCannotAccessTasksListAnonymously(): void
@@ -38,7 +38,6 @@ final class TaskControllerTest extends CustomTestCase
         $client->request('GET', '/tasks');
         $client->followRedirects();
         $this->assertResponseRedirects('http://localhost/login', 302);
-        $this->markTestIncomplete();
     }
 
 
@@ -94,18 +93,20 @@ final class TaskControllerTest extends CustomTestCase
     public function testCannotEditTaskAuthor(): void
     {
         $client = $this->createClient();
-        $client->followRedirects();
         $user1 = $this->createUser("mario1", "notluigi1!", "mario1.bros@nintendo.fr");
         $user2 = $this->createUser("sophie", "bonsoir!", "sophie.marceau@nintendo.fr");
         $task = $this->createTask("Defeat enemies", "While not forgetting to save the princess", $user1);
         $taskId = $task->getId();
         $client->loginUser($user2);
+        $client->followRedirects();
         $client->request("GET", "/tasks/$taskId/edit");
         $client->submitForm('Modifier', [
             'task[title]' => 'Faire un truc assez cool',
             'task[content]' => 'Mais faut vraiment que ce soit pas non plus trop cool quoi',
         ]);
+        $client->followRedirects();
         $this->assertNotNull($task);
+        $this->assertResponseIsSuccessful();
         $this->assertSelectorTextSame("div[class=alert-success]", "<strong>Superbe !</strong> La tâche a bien été modifiée.");
         $this->assertSame($user1, $task->getAuthor());
         $this->assertResponseRedirects('task_list');
@@ -115,6 +116,8 @@ final class TaskControllerTest extends CustomTestCase
     {
         $this->markTestIncomplete();
         $client = static::createClient();
+        $admin = $this->createAdminUser('admin1', 'password4admin', 'admin@admin.com');
+
         $crawler = $client->request('GET', '/tasks/{id}/delete');
     }
 
