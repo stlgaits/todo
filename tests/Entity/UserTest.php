@@ -65,7 +65,7 @@ final class UserTest extends CustomTestCase
         foreach ($errors as $error) {
             $validationErrors[] = $error->getPropertyPath() . ' ' . $error->getMessage();
         }
-        if ($expectPassingValidation){
+        if ($expectPassingValidation) {
             $this->assertCount(0, $errors, implode(',', $validationErrors));
         } else {
             $this->assertNotNull($validationErrors);

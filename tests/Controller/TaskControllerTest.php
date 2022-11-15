@@ -101,13 +101,13 @@ final class TaskControllerTest extends CustomTestCase
         $taskAuthor = $task->getAuthor();
         // I haven't found a better way yet to ensure we don't log in  the same user as the task's author given that
         // the tasks & user fixtures are generated at random and therefore we can't predict a task's author
-        if($taskAuthor === $user2){
+        if ($taskAuthor === $user2) {
             $client->loginUser($user1);
         } else {
             $client->loginUser($user2);
         }
         $client->request("GET", "/tasks/$taskId/edit");
-        $response = $client->submitForm('Modifier', [
+        $client->submitForm('Modifier', [
             'task[title]' => 'Faire un truc assez cool',
             'task[content]' => 'Mais faut vraiment que ce soit pas non plus trop cool quoi',
         ]);
@@ -115,7 +115,6 @@ final class TaskControllerTest extends CustomTestCase
         $this->assertNotNull($task);
         $this->assertSame($taskAuthor, $task->getAuthor());
         $this->assertResponseRedirects('/tasks', 303);
-//        $this->assertSelectorTextSame("div[class=alert-success]", "<strong>Superbe !</strong> La tâche a bien été modifiée.");
     }
 
     public function testOnlyAdminUserCanDeleteDefaultTasks(): void
@@ -124,41 +123,41 @@ final class TaskControllerTest extends CustomTestCase
         $client = static::createClient();
         $admin = $this->createAdminUser('admin1', 'password4admin', 'admin@admin.com');
 
-        $crawler = $client->request('GET', '/tasks/{id}/delete');
+        $client->request('GET', '/tasks/{id}/delete');
     }
 
     public function testTaskCanBeEditedByItsAuthor(): void
     {
         $this->markTestIncomplete();
         $client = static::createClient();
-        $crawler = $client->request('GET', '/tasks/{id}/edit');
+        $client->request('GET', '/tasks/{id}/edit');
     }
 
     public function testCannotEditATaskOfWhichUserIsNotTheAuthor(): void
     {
         $this->markTestIncomplete();
         $client = static::createClient();
-        $crawler = $client->request('GET', '/tasks/{id}/edit');
+        $client->request('GET', '/tasks/{id}/edit');
     }
 
     public function testUserCanToggleATask(): void
     {
         $this->markTestIncomplete();
         $client = static::createClient();
-        $crawler = $client->request('GET', '/tasks/{id}/toggle');
+        $client->request('GET', '/tasks/{id}/toggle');
     }
 
     public function testAuthorCanDeleteTheirOwnTask(): void
     {
         $this->markTestIncomplete();
         $client = static::createClient();
-        $crawler = $client->request('GET', '/tasks/{id}/delete');
+        $client->request('GET', '/tasks/{id}/delete');
     }
 
     public function testCannotDeleteTaskOfWhichUserIsNotTheAuthor(): void
     {
         $this->markTestIncomplete();
         $client = static::createClient();
-        $crawler = $client->request('GET', '/tasks/{id}/delete');
+        $client->request('GET', '/tasks/{id}/delete');
     }
 }
