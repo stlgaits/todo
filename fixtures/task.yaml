@@ -1,0 +1,7 @@
+App\Entity\Task:
+  task_{1..20}:
+    title: <sentence()>
+    content: <text()>
+    createdAt: <dateTimeBetween("-200 days", "now")>
+    author: '@user*'
+    toggle: <boolean()>
