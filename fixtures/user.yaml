@@ -1,0 +1,10 @@
+App\Entity\User:
+  user_{1..10}:
+    username: <username()->unique()>
+    email: <email()->unique()>
+    password: <password()>
+  admin:
+    username: admin
+    email: admin@admin.com
+    password: adminpassword
+    roles: [ "ROLE_ADMIN" ]
