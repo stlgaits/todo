@@ -8,3 +8,8 @@ App\Entity\User:
     email: admin@admin.com
     password: adminpassword
     roles: [ "ROLE_ADMIN" ]
+  anonymous:
+    username: fsociety
+    password: thisismyincredibleanonymouspassword
+    email: weareanonymous@email.com
+    roles: [ "ROLE_DISABLED" ]
