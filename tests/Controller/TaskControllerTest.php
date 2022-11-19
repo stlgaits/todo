@@ -145,11 +145,9 @@ final class TaskControllerTest extends CustomTestCase
         $this->assertSelectorExists('input[id="task_title"]');
         $this->assertSelectorExists('textarea[id="task_content"]');
         $this->assertSelectorExists('button[type="submit"]');
-
     }
 
-
-    public function testTaskCanBeEditedByItsAuthor(): void
+    public function testTaskCanBeEdited(): void
     {
         $client = $this->createClient();
         $taskRepository =$this->getEntityManager()->getRepository(Task::class);
@@ -171,39 +169,57 @@ final class TaskControllerTest extends CustomTestCase
     }
 
 
-    public function testCannotEditATaskOfWhichUserIsNotTheAuthor(): void
-    {
-        $client = $this->createClient();
-        $taskRepository = $this->getEntityManager()->getRepository(Task::class);
-        $userRepository = $this->getEntityManager()->getRepository(User::class);
-        $task = $taskRepository->find(7);
-        $taskId = $task->getId();
-        $author = $task->getAuthor();
-        // TODO find how to make an SQL request to get a User which ISN'T the task's author
-        $user = $
-        $client->loginUser($author);
-        $client->request('GET', '/tasks/{id}/edit');
-        $this->markTestIncomplete();
-    }
-
     public function testUserCanToggleATask(): void
     {
-        $this->markTestIncomplete();
-        $client = static::createClient();
-        $client->request('GET', '/tasks/{id}/toggle');
+        $client = $this->createClient();
+        $taskRepository =$this->getEntityManager()->getRepository(Task::class);
+        $task = $taskRepository->find(3);
+        $taskId = $task->getId();
+        $author = $task->getAuthor();
+        $taskStatusBefore = $task->isDone();
+        $client->loginUser($author);
+        $client->request("GET", "/tasks/$taskId/toggle");
+        $taskStatusAfter = $task->isDone();
+        $this->assertNotSame($taskStatusBefore, $taskStatusAfter);
+        $this->assertIsBool($taskStatusAfter);
+        $this->assertIsBool($taskStatusBefore);
+        $this->assertResponseRedirects("/tasks", 303);
     }
 
     public function testAuthorCanDeleteTheirOwnTask(): void
     {
-        $this->markTestIncomplete();
-        $client = static::createClient();
-        $client->request('GET', '/tasks/{id}/delete');
+        $client = $this->createClient();
+        $taskRepository = $this->getEntityManager()->getRepository(Task::class);
+        $task = $taskRepository->find(2);
+        $taskId = $task->getId();
+        $author = $task->getAuthor();
+        $client->loginUser($author);
+        $client->request("GET", "/tasks/$taskId/delete");
+        $this->assertResponseStatusCodeSame(303);
+        $this->assertNull($taskRepository->find(2));
     }
 
     public function testCannotDeleteTaskOfWhichUserIsNotTheAuthor(): void
     {
-        $this->markTestIncomplete();
-        $client = static::createClient();
-        $client->request('GET', '/tasks/{id}/delete');
+        $client = $this->createClient();
+        $taskRepository = $this->getEntityManager()->getRepository(Task::class);
+        $task = $taskRepository->find(7);
+        $taskId = $task->getId();
+        $author = $task->getAuthor();
+        $taskWithDifferentUser = $taskRepository->createQueryBuilder("t")
+            ->where('NOT t.author = :auteur')
+            ->setParameter('auteur', $author)
+            ->setFirstResult(1)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult();
+        $differentUser = $taskWithDifferentUser[0]->getAuthor();
+        $taskWithDifferentUserId = $taskWithDifferentUser[0]->getId();
+        $client->loginUser($author);
+        $client->request("GET", "/tasks/$taskWithDifferentUserId/delete");
+        $this->assertNotSame($differentUser, $author);
+        $this->assertNotSame($taskId, $taskWithDifferentUserId);
+        $this->assertResponseStatusCodeSame(403);  // Forbidden
+        $this->assertNotNull($taskRepository->find($taskWithDifferentUserId));
     }
 }
