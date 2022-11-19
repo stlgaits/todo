@@ -41,7 +41,7 @@ ADMIN_USERNAME=youradminusername
 * PHP 8.0 or above
 * yarn & Node.js
 * [composer](https://getcomposer.org/download/)
-* Download the [Symfony CLI](https://symfony.com/download).
+* Download the [Symfony CLI](https://symfony.com/download).  
 * Run this command will guide you in cases there are missing extensions or parameters you need to tweek on your machine
 
 ```bash

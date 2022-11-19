@@ -86,6 +86,6 @@ class TaskRepository extends ServiceEntityRepository
             ->orderBy('t.isDone', 'ASC')
             ->getQuery()
             ->getResult()
-            ;
+        ;
     }
 }
