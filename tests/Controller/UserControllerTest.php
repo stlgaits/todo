@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Controller;
 
 use App\Test\CustomTestCase;
-use http\Client\Curl\User;
+use App\Entity\User;
 
 /**
  * @group security

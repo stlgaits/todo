@@ -13,7 +13,6 @@ use App\Test\CustomTestCase;
  */
 final class DefaultControllerTest extends CustomTestCase
 {
-
     /**
      * @covers \App\Controller\DefaultController::index
      */
