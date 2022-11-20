@@ -13,11 +13,20 @@ use Symfony\Component\Validator\ConstraintViolation;
  */
 final class UserTest extends CustomTestCase
 {
+    /**
+     * @coversNothing
+     */
     public function testItWorks(): void
     {
         self::assertEquals(42, 42);
     }
 
+    /**
+     * @covers \App\Entity\User::setUsername
+     * @covers \App\Entity\User::setPassword
+     * @covers \App\Entity\User::setEmail
+     * @covers \App\Entity\User::setRoles
+     */
     public function testCanGetAndSetData(): void
     {
         $user = new User();
@@ -33,6 +42,7 @@ final class UserTest extends CustomTestCase
 
     /**
      * @dataProvider invalidEmailProvider
+     * @covers \App\Entity\User::setEmail
      */
     public function testEmailValidation(string $email): void
     {

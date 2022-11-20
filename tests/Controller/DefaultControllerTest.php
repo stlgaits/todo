@@ -7,10 +7,16 @@ namespace App\Tests\Controller;
 use App\Test\CustomTestCase;
 
 /**
- * @covers \App\Entity\DefaultController
+ * @covers \App\Controller\DefaultController
+ * @uses \App\Security\Voter\TaskVoter
+ * @uses \App\Entity\User
  */
 final class DefaultControllerTest extends CustomTestCase
 {
+
+    /**
+     * @covers \App\Controller\DefaultController::index
+     */
     public function testIndex(): void
     {
         self::ensureKernelShutdown();
@@ -23,6 +29,9 @@ final class DefaultControllerTest extends CustomTestCase
         $this->assertSelectorTextContains('h1', "Bienvenue sur Todo List, l'application vous permettant de gérer l'ensemble de vos tâches sans effort !");
     }
 
+    /**
+     * @covers \App\Controller\DefaultController::index
+     */
     public function testVisitingWhileLoggedIn(): void
     {
         $client = self::createClient();
