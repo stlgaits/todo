@@ -92,7 +92,25 @@ final class UserControllerTest extends CustomTestCase
      */
     public function testAdminUserCanEditAnotherUser(): void
     {
-        $this->markTestIncomplete();
+        $client = $this->createClient();
+        $userRepository = $this->getEntityManager()->getRepository(User::class);
+        $admin = $userRepository->findOneBy(['username' => 'admin']);
+        $user = $userRepository->findOneBy(['username' => 'userwhichwillchange']);
+        $userId = $user->getId();
+        $client->loginUser($admin);
+        $client->request("GET", "/users/$userId/edit");
+        $client->submitForm('Modifier', [
+            'user[username]' => 'simpleuserchanged',
+            'user[email]' => 'simpleuserchanged@gmail.com',
+            'user[roles]' => 'ROLE_USER',
+        ]);
+        $client->followRedirects();
+        $userAfterUpdate = $userRepository->find($userId);
+        $this->assertResponseRedirects('/users', 302);
+        $this->assertNotNull($userRepository->findOneBy(['username' => 'simpleuserchanged']));
+        $this->assertNull($userRepository->findOneBy(['username' => 'userwhichwillchange']));
+        $this->assertSame('simpleuserchanged', $userAfterUpdate->getUsername());
+        $this->assertSame('simpleuserchanged@gmail.com', $userAfterUpdate->getEmail());
     }
 
     /**
