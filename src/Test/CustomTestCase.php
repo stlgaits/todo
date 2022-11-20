@@ -10,7 +10,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-
 /**
  * @codeCoverageIgnore
  */

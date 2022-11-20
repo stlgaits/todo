@@ -3,11 +3,21 @@ App\Entity\User:
     username: <username()->unique()>
     email: <email()->unique()>
     password: <password()>
+  simpleuser:
+    username: simpleuser
+    email: simpleuser@simpleuser.com
+    password: simpleuser
+    roles: [ "ROLE_USER" ]
+  user_to_update:
+    username: userwhichwillchange
+    email: userwhichwillchange@simpleuser.com
+    password: userwhichwillchange
+    roles: [ "ROLE_USER" ]
   admin:
-    username: admin
-    email: admin@admin.com
-    password: adminpassword
-    roles: [ "ROLE_ADMIN" ]
+      username: admin
+      email: admin@admin.com
+      password: adminpassword
+      roles: [ "ROLE_ADMIN" ]
   anonymous:
     username: fsociety
     password: thisismyincredibleanonymouspassword
