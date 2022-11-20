@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1668972017">
-  <project timestamp="1668972017">
+<coverage generated="1668972382">
+  <project timestamp="1668972382">
     <file name="C:\laragon\www\todo_sf5\src\Controller\DefaultController.php">
       <class name="App\Controller\DefaultController" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
@@ -161,9 +161,9 @@
       <line num="59" type="stmt" count="0"/>
       <line num="62" type="method" name="getCreatedAt" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="64" type="stmt" count="0"/>
-      <line num="67" type="method" name="setCreatedAt" visibility="public" complexity="1" crap="1" count="3"/>
-      <line num="69" type="stmt" count="3"/>
-      <line num="71" type="stmt" count="3"/>
+      <line num="67" type="method" name="setCreatedAt" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="69" type="stmt" count="2"/>
+      <line num="71" type="stmt" count="2"/>
       <line num="74" type="method" name="getTitle" visibility="public" complexity="1" crap="1" count="5"/>
       <line num="76" type="stmt" count="5"/>
       <line num="79" type="method" name="setTitle" visibility="public" complexity="1" crap="1" count="12"/>
@@ -176,14 +176,14 @@
       <line num="95" type="stmt" count="12"/>
       <line num="98" type="method" name="isDone" visibility="public" complexity="1" crap="1" count="12"/>
       <line num="100" type="stmt" count="12"/>
-      <line num="103" type="method" name="toggle" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="105" type="stmt" count="2"/>
-      <line num="107" type="stmt" count="2"/>
+      <line num="103" type="method" name="toggle" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="105" type="stmt" count="1"/>
+      <line num="107" type="stmt" count="1"/>
       <line num="110" type="method" name="getAuthor" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="112" type="stmt" count="1"/>
-      <line num="115" type="method" name="setAuthor" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="117" type="stmt" count="2"/>
-      <line num="119" type="stmt" count="2"/>
+      <line num="115" type="method" name="setAuthor" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="117" type="stmt" count="1"/>
+      <line num="119" type="stmt" count="1"/>
       <line num="122" type="method" name="__toString" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="124" type="stmt" count="0"/>
       <metrics loc="127" ncloc="100" classes="1" methods="13" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="16" elements="32" coveredelements="26"/>

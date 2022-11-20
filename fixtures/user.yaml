@@ -3,6 +3,11 @@ App\Entity\User:
     username: <username()->unique()>
     email: <email()->unique()>
     password: <password()>
+  simpleuser:
+    username: simpleuser
+    email: simpleuser@simpleuser.com
+    password: simpleuser
+    roles: [ "ROLE_USER" ]
   admin:
     username: admin
     email: admin@admin.com

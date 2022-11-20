@@ -78,7 +78,13 @@ final class UserControllerTest extends CustomTestCase
      */
     public function testNonAdminUserCannotCreateNewUser(): void
     {
-        $this->markTestIncomplete();
+        $client = $this->createClient();
+        $userRepository = $this->getEntityManager()->getRepository(User::class);
+        $user = $userRepository->findOneBy(['username' => 'simpleuser']);
+        $client->loginUser($user);
+        $client->request('GET', '/users/create');
+        $client->followRedirects();
+        $this->assertResponseStatusCodeSame(403);
     }
 
     /**
