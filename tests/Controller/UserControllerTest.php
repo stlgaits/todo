@@ -52,6 +52,7 @@ final class UserControllerTest extends CustomTestCase
 
     /**
      * @covers \App\Controller\UserController::create
+     * @uses \App\Form\UserType
      */
     public function testAdminUserCanCreateNewUser(): void
     {
@@ -60,12 +61,16 @@ final class UserControllerTest extends CustomTestCase
         $user = $userRepository->findOneBy(['username' => 'admin']);
         $client->loginUser($user);
         $client->request('GET', '/users/create');
-        $this->markTestIncomplete();
-        // @TODO: submit form & test whether new user is persisted in database
-//        $client->submitForm('Add comment', [
-//            'comment_form[content]' => '...',
-//        ]);
-        $this->assertResponseIsSuccessful();
+        $client->submitForm('Ajouter', [
+            'user[username]' => 'ciloutest',
+            'user[password][first]' => 'monpotdemasse',
+            'user[password][second]' => 'monpotdemasse',
+            'user[email]' => 'ciloutest@gmail.com',
+            'user[roles]' => 'ROLE_USER',
+        ]);
+        $client->followRedirects();
+        $this->assertResponseRedirects('/users', 302);
+        $this->assertNotNull($userRepository->findOneBy(['username' => 'ciloutest']));
     }
 
     /**
