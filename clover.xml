@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1668968529">
-  <project timestamp="1668968529">
+<coverage generated="1668973810">
+  <project timestamp="1668973810">
     <file name="C:\laragon\www\todo_sf5\src\Controller\DefaultController.php">
       <class name="App\Controller\DefaultController" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </class>
-      <line num="13" type="method" name="index" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="16" type="stmt" count="2"/>
+      <line num="13" type="method" name="index" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="16" type="stmt" count="1"/>
       <metrics loc="19" ncloc="19" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
     </file>
     <file name="C:\laragon\www\todo_sf5\src\Controller\SecurityController.php">
@@ -58,25 +58,25 @@
     </file>
     <file name="C:\laragon\www\todo_sf5\src\Controller\UserController.php">
       <class name="App\Controller\UserController" namespace="global">
-        <metrics complexity="7" methods="3" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="23" coveredstatements="3" elements="26" coveredelements="4"/>
+        <metrics complexity="7" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="23" coveredstatements="15" elements="26" coveredelements="17"/>
       </class>
       <line num="18" type="method" name="list" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="21" type="stmt" count="1"/>
       <line num="22" type="stmt" count="1"/>
       <line num="25" type="stmt" count="1"/>
-      <line num="30" type="method" name="create" visibility="public" complexity="3" crap="12" count="0"/>
-      <line num="33" type="stmt" count="0"/>
-      <line num="34" type="stmt" count="0"/>
-      <line num="38" type="stmt" count="0"/>
-      <line num="40" type="stmt" count="0"/>
-      <line num="42" type="stmt" count="0"/>
-      <line num="43" type="stmt" count="0"/>
-      <line num="45" type="stmt" count="0"/>
-      <line num="49" type="stmt" count="0"/>
-      <line num="50" type="stmt" count="0"/>
-      <line num="52" type="stmt" count="0"/>
-      <line num="54" type="stmt" count="0"/>
-      <line num="57" type="stmt" count="0"/>
+      <line num="30" type="method" name="create" visibility="public" complexity="3" crap="3" count="1"/>
+      <line num="33" type="stmt" count="1"/>
+      <line num="34" type="stmt" count="1"/>
+      <line num="38" type="stmt" count="1"/>
+      <line num="40" type="stmt" count="1"/>
+      <line num="42" type="stmt" count="1"/>
+      <line num="43" type="stmt" count="1"/>
+      <line num="45" type="stmt" count="1"/>
+      <line num="49" type="stmt" count="1"/>
+      <line num="50" type="stmt" count="1"/>
+      <line num="52" type="stmt" count="1"/>
+      <line num="54" type="stmt" count="1"/>
+      <line num="57" type="stmt" count="1"/>
       <line num="60" type="method" name="edit" visibility="public" complexity="3" crap="12" count="0"/>
       <line num="63" type="stmt" count="0"/>
       <line num="67" type="stmt" count="0"/>
@@ -86,7 +86,7 @@
       <line num="73" type="stmt" count="0"/>
       <line num="75" type="stmt" count="0"/>
       <line num="78" type="stmt" count="0"/>
-      <metrics loc="81" ncloc="80" classes="1" methods="3" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="23" coveredstatements="3" elements="26" coveredelements="4"/>
+      <metrics loc="81" ncloc="80" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="23" coveredstatements="15" elements="26" coveredelements="17"/>
     </file>
     <file name="C:\laragon\www\todo_sf5\src\DataFixtures\TaskFixtures.php">
       <class name="App\DataFixtures\TaskFixtures" namespace="global">
@@ -161,9 +161,9 @@
       <line num="59" type="stmt" count="0"/>
       <line num="62" type="method" name="getCreatedAt" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="64" type="stmt" count="0"/>
-      <line num="67" type="method" name="setCreatedAt" visibility="public" complexity="1" crap="1" count="3"/>
-      <line num="69" type="stmt" count="3"/>
-      <line num="71" type="stmt" count="3"/>
+      <line num="67" type="method" name="setCreatedAt" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="69" type="stmt" count="2"/>
+      <line num="71" type="stmt" count="2"/>
       <line num="74" type="method" name="getTitle" visibility="public" complexity="1" crap="1" count="5"/>
       <line num="76" type="stmt" count="5"/>
       <line num="79" type="method" name="setTitle" visibility="public" complexity="1" crap="1" count="12"/>
@@ -176,14 +176,14 @@
       <line num="95" type="stmt" count="12"/>
       <line num="98" type="method" name="isDone" visibility="public" complexity="1" crap="1" count="12"/>
       <line num="100" type="stmt" count="12"/>
-      <line num="103" type="method" name="toggle" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="105" type="stmt" count="2"/>
-      <line num="107" type="stmt" count="2"/>
+      <line num="103" type="method" name="toggle" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="105" type="stmt" count="1"/>
+      <line num="107" type="stmt" count="1"/>
       <line num="110" type="method" name="getAuthor" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="112" type="stmt" count="1"/>
-      <line num="115" type="method" name="setAuthor" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="117" type="stmt" count="2"/>
-      <line num="119" type="stmt" count="2"/>
+      <line num="115" type="method" name="setAuthor" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="117" type="stmt" count="1"/>
+      <line num="119" type="stmt" count="1"/>
       <line num="122" type="method" name="__toString" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="124" type="stmt" count="0"/>
       <metrics loc="127" ncloc="100" classes="1" methods="13" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="16" elements="32" coveredelements="26"/>
@@ -357,8 +357,8 @@
       <class name="App\Test\CustomTestCase" namespace="global">
         <metrics complexity="8" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </class>
-      <metrics loc="95" ncloc="89" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      <metrics loc="94" ncloc="88" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <metrics files="15" loc="1143" ncloc="947" classes="13" methods="63" coveredmethods="29" conditionals="0" coveredconditionals="0" statements="206" coveredstatements="66" elements="269" coveredelements="95"/>
+    <metrics files="15" loc="1142" ncloc="946" classes="13" methods="63" coveredmethods="30" conditionals="0" coveredconditionals="0" statements="206" coveredstatements="78" elements="269" coveredelements="108"/>
   </project>
 </coverage>
