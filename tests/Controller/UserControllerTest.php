@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Controller;
 
 use App\Test\CustomTestCase;
+use http\Client\Curl\User;
 
 /**
  * @group security
@@ -55,7 +56,8 @@ final class UserControllerTest extends CustomTestCase
     public function testAdminUserCanCreateNewUser(): void
     {
         $client = $this->createClient();
-        $user = $this->createAdminUser("IamAdmin", "mysupersecureadminpwd", "admin@gmail.com");
+        $userRepository = $this->getEntityManager()->getRepository(User::class);
+        $user = $userRepository->findOneBy(['username' => 'admin']);
         $client->loginUser($user);
         $client->request('GET', '/users/create');
         $this->markTestIncomplete();
