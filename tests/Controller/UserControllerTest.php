@@ -5,12 +5,19 @@ declare(strict_types=1);
 namespace App\Tests\Controller;
 
 use App\Test\CustomTestCase;
+use http\Client\Curl\User;
 
 /**
  * @group security
+ * @covers  App\Controller\UserController
+ * @uses \App\Entity\User
+ * @uses \App\Security\Voter\TaskVoter
  */
 final class UserControllerTest extends CustomTestCase
 {
+    /**
+     * @covers \App\Controller\UserController::list
+     */
     public function testOnlyAdminUsersCanAccessUsersListPage(): void
     {
         $client = $this->createClient();
@@ -20,6 +27,9 @@ final class UserControllerTest extends CustomTestCase
         $this->assertResponseIsSuccessful();
     }
 
+    /**
+     * @covers \App\Controller\UserController::list
+     */
     public function testAnonymousUserCannotAccessUsersListPage(): void
     {
         $client = $this->createClient();
@@ -28,6 +38,9 @@ final class UserControllerTest extends CustomTestCase
         $this->assertResponseStatusCodeSame(302);
     }
 
+    /**
+     * @covers \App\Controller\UserController::list
+     */
     public function testNonAdminUserCannotAccessUsersListPage(): void
     {
         $client = $this->createClient();
@@ -37,10 +50,14 @@ final class UserControllerTest extends CustomTestCase
         $this->assertResponseStatusCodeSame(403);
     }
 
+    /**
+     * @covers \App\Controller\UserController::create
+     */
     public function testAdminUserCanCreateNewUser(): void
     {
         $client = $this->createClient();
-        $user = $this->createAdminUser("IamAdmin", "mysupersecureadminpwd", "admin@gmail.com");
+        $userRepository = $this->getEntityManager()->getRepository(User::class);
+        $user = $userRepository->findOneBy(['username' => 'admin']);
         $client->loginUser($user);
         $client->request('GET', '/users/create');
         $this->markTestIncomplete();
@@ -51,26 +68,41 @@ final class UserControllerTest extends CustomTestCase
         $this->assertResponseIsSuccessful();
     }
 
+    /**
+     * @covers \App\Controller\UserController::create
+     */
     public function testNonAdminUserCannotCreateNewUser(): void
     {
         $this->markTestIncomplete();
     }
 
+    /**
+     * @covers \App\Controller\UserController::edit
+     */
     public function testAdminUserCanEditAnotherUser(): void
     {
         $this->markTestIncomplete();
     }
 
+    /**
+     * @covers \App\Controller\UserController::edit
+     */
     public function testAdminUserCanPromoteAnotherUser(): void
     {
         $this->markTestIncomplete();
     }
 
+    /**
+     * @covers \App\Controller\UserController::edit
+     */
     public function testAdminUserCanDemoteAnotherUser(): void
     {
         $this->markTestIncomplete();
     }
 
+    /**
+     * @covers \App\Controller\UserController::edit
+     */
     public function testNonAdminUserCannotEditAnotherUser(): void
     {
         $this->markTestIncomplete();

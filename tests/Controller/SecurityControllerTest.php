@@ -9,9 +9,14 @@ use App\Test\CustomTestCase;
 /**
  * @group security
  * @covers \App\Controller\SecurityController
+ * @covers \App\Security\Voter\TaskVoter
+ * @uses \App\Entity\User
  */
 final class SecurityControllerTest extends CustomTestCase
 {
+    /**
+     * @covers \App\Controller\SecurityController::login
+     */
     public function testAnyoneCanAccessLoginForm(): void
     {
         $client = $this->createClient();
@@ -19,6 +24,9 @@ final class SecurityControllerTest extends CustomTestCase
         $this->assertResponseIsSuccessful();
     }
 
+    /**
+     * @covers \App\Controller\SecurityController::login
+     */
     public function testLogin(): void
     {
         $client = $this->createClient();
@@ -28,6 +36,9 @@ final class SecurityControllerTest extends CustomTestCase
         $this->assertResponseIsSuccessful();
     }
 
+    /**
+     * @covers \App\Controller\SecurityController::login
+     */
     public function testUserCanLoginViaForm(): void
     {
         $client = $this->createClient();
@@ -43,6 +54,9 @@ final class SecurityControllerTest extends CustomTestCase
     }
 
 
+    /**
+     * @covers \App\Controller\SecurityController::login
+     */
     public function testCannotLoginWithInvalidCredentials(): void
     {
         $client = static::createClient();
@@ -60,6 +74,9 @@ final class SecurityControllerTest extends CustomTestCase
     }
 
 
+    /**
+     * @covers \App\Controller\SecurityController::logout
+     */
     public function testLogout(): void
     {
         $this->markTestSkipped();

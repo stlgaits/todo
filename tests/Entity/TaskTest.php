@@ -13,15 +13,25 @@ use Faker\Provider\Lorem;
 use Symfony\Component\Validator\ConstraintViolation;
 
 /**
- * @covers Task
+ * @covers \App\Entity\Task
+ * @uses \App\Entity\User
  */
 final class TaskTest extends CustomTestCase
 {
+    /**
+     * @coversNothing
+     */
     public function testItWorks(): void
     {
         self::assertEquals(42, 42);
     }
 
+    /**
+     * @covers \App\Entity\Task::setTitle
+     * @covers \App\Entity\Task::isDone
+     * @covers \App\Entity\Task::setCreatedAt
+     * @covers \App\Entity\Task::setContent
+     */
     public function testCanGetAndSetData(): void
     {
         $task = new Task();
@@ -34,6 +44,12 @@ final class TaskTest extends CustomTestCase
         $this->assertSame(false, $task->isDone());
     }
 
+    /**
+     * @covers \App\Entity\Task::setTitle
+     * @covers \App\Entity\Task::setContent
+     * @covers \App\Entity\Task::setCreatedAt
+     * @covers \App\Entity\Task::toggle
+     */
     public function testCanToggleATask(): void
     {
         $task = new Task();
@@ -46,6 +62,7 @@ final class TaskTest extends CustomTestCase
 
     /**
      * @dataProvider titleProvider
+     * @covers \App\Entity\Task::setTitle
      */
     public function testTaskShouldHaveATitleString(string $title): void
     {
@@ -56,6 +73,7 @@ final class TaskTest extends CustomTestCase
 
     /**
      * @dataProvider contentProvider
+     * @covers \App\Entity\Task::setContent
      */
     public function testTaskShouldHaveADescription(string $content): void
     {
@@ -64,6 +82,9 @@ final class TaskTest extends CustomTestCase
         $this->assertSame($content, $task->getContent());
     }
 
+    /**
+     * @covers \App\Entity\Task::setAuthor
+     */
     public function testATaskShouldHaveAnAuthor(): void
     {
         $em = $this->getEntityManager();
@@ -81,6 +102,9 @@ final class TaskTest extends CustomTestCase
     }
 
 
+    /**
+     * @covers \App\Entity\Task::setAuthor
+     */
     public function testCannotCreateTaskWithoutAuthor(): void
     {
         $this->expectException(NotNullConstraintViolationException::class);

@@ -3,21 +3,22 @@
 > A simple to-do list app which may have needed some enhancements here & there!
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/30d28b33b7fd4fbb92d0a523cff172eb)](https://www.codacy.com/gh/EstelleMyddleware/todo/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=EstelleMyddleware/todo&amp;utm_campaign=Badge_Grade)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/EstelleMyddleware/todo)](https://github.com/EstelleMyddleware/todo)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/stlgaits/todo)](https://github.com/EstelleMyddleware/todo)
 ![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/EstelleMyddleware/todo/bootstrap)
-![GitHub repo size](https://img.shields.io/github/repo-size/EstelleMyddleware/todo)
-[![GitHub issues](https://img.shields.io/github/issues/EstelleMyddleware/todo)](https://github.com/EstelleMyddleware/todo/issues)
-[![GitHub closed issues](https://img.shields.io/github/issues-closed/EstelleMyddleware/todo)](https://github.com/EstelleMyddleware/todo/issues?q=is%3Aissue+is%3Aclosed)
-![GitHub last commit](https://img.shields.io/github/last-commit/EstelleMyddleware/todo)
+![GitHub repo size](https://img.shields.io/github/repo-size/stlgaits/todo)
+[![GitHub issues](https://img.shields.io/github/issues/stlgaits/todo)](https://github.com/stlgaits/todo/issues)
+[![GitHub closed issues](https://img.shields.io/github/issues-closed/stlgaits/todo)](https://github.com/stlgaits/todo/issues?q=is%3Aissue+is%3Aclosed)
+![GitHub last commit](https://img.shields.io/github/last-commit/stlgaits/todo)
 [![docsify](https://img.shields.io/badge/documented%20with-docsify-cc00ff.svg)](https://docsify.js.org/)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/def1dc4a68e847998365282ad9e8b3ee)](https://www.codacy.com/gh/EstelleMyddleware/todo/dashboard?utm_source=github.com&utm_medium=referral&utm_content=EstelleMyddleware/todo&utm_campaign=Badge_Coverage)
+
+:mega::mega::mega: **You can view the detailed documentation & UML diagrams of this project [here](https://stlgaits.github.io/todo/)** :mega::mega::mega:
 
 !> This project is part of the Openclassrooms PHP / Symfony Apps Developer training course. It consists in auditing, 
 unit-testing, profiling & making improvements to an existing to-do list app built in Symfony 3.1 
 (available [here](https://github.com/saro0h/projet8-TodoList)).
 
-[![Estelle's GitHub stats](https://github-readme-stats.vercel.app/api?username=EstelleMyddleware&show_icons=true&theme=tokyonight)](https://github.com/EstelleMyddleware/github-readme-stats)
-
-You can view the detailed documentation of this project [here](https://estellemyddleware.github.io/todo/)
+[![Estelle's GitHub stats](https://github-readme-stats.vercel.app/api?username=stlgaits&show_icons=true&theme=tokyonight)](https://github.com/stlgaits/github-readme-stats)
 
 ## Installation
 
