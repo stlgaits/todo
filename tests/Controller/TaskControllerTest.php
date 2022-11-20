@@ -9,10 +9,17 @@ use App\Entity\User;
 use App\Test\CustomTestCase;
 
 /**
- * @covers \App\Entity\TaskController
+ * @covers \App\Controller\TaskController
+ * @uses \App\Security\Voter\TaskVoter
+ * @uses \App\Entity\Task
+ * @uses \App\Repository\TaskRepository
+ * @uses \App\Entity\User
  */
 final class TaskControllerTest extends CustomTestCase
 {
+    /**
+     * @covers \App\Controller\TaskController::list
+     */
     public function testUserCanReadTasksList(): void
     {
         $client = $this->createClient();
@@ -22,6 +29,10 @@ final class TaskControllerTest extends CustomTestCase
         $this->assertResponseIsSuccessful();
     }
 
+    /**
+     * @covers \App\Controller\TaskController::list
+     * @uses \App\Controller\DefaultController::index
+     */
     public function testUserCanAccessTaskListViaALink(): void
     {
         $client = $this->createClient();
@@ -35,6 +46,9 @@ final class TaskControllerTest extends CustomTestCase
         $this->assertSelectorTextContains("button", "Marquer comme faite");
     }
 
+    /**
+     * @covers \App\Controller\TaskController::list
+     */
     public function testCannotAccessTasksListAnonymously(): void
     {
         $client = $this->createClient();
@@ -44,6 +58,10 @@ final class TaskControllerTest extends CustomTestCase
     }
 
 
+    /**
+     * @covers \App\Controller\TaskController::create
+     * @uses \App\Controller\SecurityController::login
+     */
     public function testCannotCreateTaskAnonymously(): void
     {
         $client = $this->createClient();
@@ -57,6 +75,10 @@ final class TaskControllerTest extends CustomTestCase
         );
     }
 
+    /**
+     * @covers \App\Controller\TaskController::create
+     * @uses \App\Form\TaskType
+     */
     public function testLoggedInUsersCanAccessTaskCreationPage(): void
     {
         $client = $this->createClient();
@@ -70,6 +92,10 @@ final class TaskControllerTest extends CustomTestCase
         $this->assertSelectorExists('button[type="submit"]');
     }
 
+    /**
+     * @covers \App\Controller\TaskController::create
+     * @uses \App\Form\TaskType
+     */
     public function testUserCanCreateNewTask(): void
     {
         $client = $this->createClient();
@@ -91,6 +117,10 @@ final class TaskControllerTest extends CustomTestCase
     }
 
 
+    /**
+     * @covers \App\Controller\TaskController::edit
+     * @uses \App\Form\TaskType
+     */
     public function testCannotEditTaskAuthor(): void
     {
         $client = $this->createClient();
@@ -117,6 +147,9 @@ final class TaskControllerTest extends CustomTestCase
         $this->assertResponseRedirects('/tasks', 303);
     }
 
+    /**
+     * @covers \App\Controller\TaskController::deleteTask
+     */
     public function testAdminUserCanDeleteDefaultTasks(): void
     {
         $client = $this->createClient();
@@ -131,6 +164,10 @@ final class TaskControllerTest extends CustomTestCase
         $this->assertResponseRedirects('/tasks', 303);
     }
 
+    /**
+     * @covers \App\Controller\TaskController::edit
+     * @uses \App\Form\TaskType
+     */
     public function testAuthorCanAccessTaskEditForm(): void
     {
         $client = $this->createClient();
@@ -147,6 +184,10 @@ final class TaskControllerTest extends CustomTestCase
         $this->assertSelectorExists('button[type="submit"]');
     }
 
+    /**
+     * @covers \App\Controller\TaskController::edit
+     * @uses \App\Form\TaskType
+     */
     public function testTaskCanBeEdited(): void
     {
         $client = $this->createClient();
@@ -169,6 +210,9 @@ final class TaskControllerTest extends CustomTestCase
     }
 
 
+    /**
+     * @covers \App\Controller\TaskController::toggleTask
+     */
     public function testUserCanToggleATask(): void
     {
         $client = $this->createClient();
@@ -186,6 +230,9 @@ final class TaskControllerTest extends CustomTestCase
         $this->assertResponseRedirects("/tasks", 303);
     }
 
+    /**
+     * @covers \App\Controller\TaskController::deleteTask
+     */
     public function testAuthorCanDeleteTheirOwnTask(): void
     {
         $client = $this->createClient();
@@ -199,6 +246,9 @@ final class TaskControllerTest extends CustomTestCase
         $this->assertNull($taskRepository->find(2));
     }
 
+    /**
+     * @covers \App\Controller\TaskController::deleteTask
+     */
     public function testCannotDeleteTaskOfWhichUserIsNotTheAuthor(): void
     {
         $client = $this->createClient();
