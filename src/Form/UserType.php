@@ -29,13 +29,11 @@ class UserType extends AbstractType
         $builder
             ->add('username', TextType::class, [
                 'label' => 'Nom d\'utilisateur',
-//                'maxlength' => 25,
                 ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les deux mots de passe doivent correspondre.',
                 'required' => $options['require_password'],
-//                'maxlength' => 64,
                 'first_options'  => ['label' => 'Mot de passe'],
                 'second_options' => ['label' => 'Tapez le mot de passe à nouveau'],
             ])

@@ -26,6 +26,7 @@ class TaskRepository extends ServiceEntityRepository
     /**
      * @throws ORMException
      * @throws OptimisticLockException
+     * @codeCoverageIgnore
      */
     public function add(Task $entity, bool $flush = true): void
     {
@@ -38,6 +39,7 @@ class TaskRepository extends ServiceEntityRepository
     /**
      * @throws ORMException
      * @throws OptimisticLockException
+     * @codeCoverageIgnore
      */
     public function remove(Task $entity, bool $flush = true): void
     {

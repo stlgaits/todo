@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1669224311">
-  <project timestamp="1669224311">
+<coverage generated="1669225271">
+  <project timestamp="1669225271">
     <file name="C:\laragon\www\todo_sf5\src\Controller\DefaultController.php">
       <class name="App\Controller\DefaultController" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
@@ -13,10 +13,10 @@
       <class name="App\Controller\SecurityController" namespace="global">
         <metrics complexity="3" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
       </class>
-      <line num="14" type="method" name="login" visibility="public" complexity="1" crap="1" count="3"/>
-      <line num="17" type="stmt" count="3"/>
-      <line num="18" type="stmt" count="3"/>
-      <line num="20" type="stmt" count="3"/>
+      <line num="14" type="method" name="login" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="17" type="stmt" count="4"/>
+      <line num="18" type="stmt" count="4"/>
+      <line num="20" type="stmt" count="4"/>
       <metrics loc="38" ncloc="36" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
     </file>
     <file name="C:\laragon\www\todo_sf5\src\Controller\TaskController.php">
@@ -194,84 +194,60 @@
       <line num="23" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="27" type="method" name="buildForm" visibility="public" complexity="3" crap="12" count="0"/>
       <line num="30" type="stmt" count="0"/>
-      <line num="34" type="stmt" count="0"/>
-      <line num="37" type="stmt" count="0"/>
+      <line num="33" type="stmt" count="0"/>
+      <line num="36" type="stmt" count="0"/>
+      <line num="40" type="stmt" count="0"/>
+      <line num="41" type="stmt" count="0"/>
       <line num="42" type="stmt" count="0"/>
-      <line num="43" type="stmt" count="0"/>
-      <line num="44" type="stmt" count="0"/>
+      <line num="49" type="stmt" count="0"/>
+      <line num="50" type="stmt" count="0"/>
       <line num="51" type="stmt" count="0"/>
       <line num="52" type="stmt" count="0"/>
-      <line num="53" type="stmt" count="0"/>
       <line num="54" type="stmt" count="0"/>
       <line num="56" type="stmt" count="0"/>
-      <line num="58" type="stmt" count="0"/>
-      <line num="59" type="stmt" count="0"/>
+      <line num="57" type="stmt" count="0"/>
+      <line num="60" type="stmt" count="0"/>
       <line num="62" type="stmt" count="0"/>
-      <line num="64" type="stmt" count="0"/>
-      <line num="69" type="method" name="onPostSetData" visibility="public" complexity="4" crap="20" count="0"/>
+      <line num="67" type="method" name="onPostSetData" visibility="public" complexity="4" crap="20" count="0"/>
+      <line num="69" type="stmt" count="0"/>
+      <line num="70" type="stmt" count="0"/>
       <line num="71" type="stmt" count="0"/>
       <line num="72" type="stmt" count="0"/>
       <line num="73" type="stmt" count="0"/>
       <line num="74" type="stmt" count="0"/>
-      <line num="75" type="stmt" count="0"/>
-      <line num="76" type="stmt" count="0"/>
-      <line num="79" type="stmt" count="0"/>
-      <line num="83" type="method" name="configureOptions" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="85" type="stmt" count="0"/>
-      <line num="89" type="stmt" count="0"/>
-      <metrics loc="92" ncloc="91" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="0" elements="29" coveredelements="0"/>
+      <line num="77" type="stmt" count="0"/>
+      <line num="81" type="method" name="configureOptions" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="83" type="stmt" count="0"/>
+      <line num="87" type="stmt" count="0"/>
+      <metrics loc="90" ncloc="90" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="0" elements="29" coveredelements="0"/>
     </file>
     <file name="C:\laragon\www\todo_sf5\src\Repository\TaskRepository.php">
       <class name="App\Repository\TaskRepository" namespace="global">
-        <metrics complexity="6" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="15" coveredelements="0"/>
+        <metrics complexity="6" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="7" coveredelements="0"/>
       </class>
       <line num="21" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="23" type="stmt" count="0"/>
-      <line num="30" type="method" name="add" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="32" type="stmt" count="0"/>
-      <line num="33" type="stmt" count="0"/>
-      <line num="34" type="stmt" count="0"/>
-      <line num="42" type="method" name="remove" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="44" type="stmt" count="0"/>
-      <line num="45" type="stmt" count="0"/>
-      <line num="46" type="stmt" count="0"/>
-      <line num="83" type="method" name="orderByStatus" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="85" type="stmt" count="0"/>
-      <line num="86" type="stmt" count="0"/>
+      <line num="85" type="method" name="orderByStatus" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="87" type="stmt" count="0"/>
       <line num="88" type="stmt" count="0"/>
-      <metrics loc="92" ncloc="47" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="15" coveredelements="0"/>
+      <line num="89" type="stmt" count="0"/>
+      <line num="90" type="stmt" count="0"/>
+      <metrics loc="94" ncloc="47" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="7" coveredelements="0"/>
     </file>
     <file name="C:\laragon\www\todo_sf5\src\Repository\UserRepository.php">
       <class name="App\Repository\UserRepository" namespace="global">
-        <metrics complexity="7" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="16" coveredelements="0"/>
+        <metrics complexity="7" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </class>
-      <line num="24" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="26" type="stmt" count="0"/>
-      <line num="33" type="method" name="add" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="35" type="stmt" count="0"/>
-      <line num="36" type="stmt" count="0"/>
-      <line num="37" type="stmt" count="0"/>
-      <line num="45" type="method" name="remove" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="47" type="stmt" count="0"/>
-      <line num="48" type="stmt" count="0"/>
-      <line num="49" type="stmt" count="0"/>
-      <line num="56" type="method" name="upgradePassword" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="58" type="stmt" count="0"/>
-      <line num="59" type="stmt" count="0"/>
-      <line num="62" type="stmt" count="0"/>
-      <line num="63" type="stmt" count="0"/>
-      <line num="64" type="stmt" count="0"/>
-      <metrics loc="96" ncloc="52" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="16" coveredelements="0"/>
+      <metrics loc="97" ncloc="52" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="C:\laragon\www\todo_sf5\src\Security\Voter\TaskVoter.php">
       <class name="App\Security\Voter\TaskVoter" namespace="global">
         <metrics complexity="9" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="2" elements="15" coveredelements="4"/>
       </class>
-      <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
-      <line num="20" type="stmt" count="3"/>
-      <line num="23" type="method" name="supports" visibility="protected" complexity="2" crap="2" count="3"/>
-      <line num="25" type="stmt" count="3"/>
+      <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="20" type="stmt" count="4"/>
+      <line num="23" type="method" name="supports" visibility="protected" complexity="2" crap="2" count="4"/>
+      <line num="25" type="stmt" count="4"/>
       <line num="32" type="method" name="voteOnAttribute" visibility="protected" complexity="6" crap="42" count="0"/>
       <line num="34" type="stmt" count="0"/>
       <line num="36" type="stmt" count="0"/>
@@ -285,6 +261,6 @@
       <line num="54" type="stmt" count="0"/>
       <metrics loc="57" ncloc="50" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="2" elements="15" coveredelements="4"/>
     </file>
-    <metrics files="11" loc="925" ncloc="737" classes="11" methods="56" coveredmethods="30" conditionals="0" coveredconditionals="0" statements="163" coveredstatements="78" elements="219" coveredelements="108"/>
+    <metrics files="11" loc="926" ncloc="736" classes="10" methods="50" coveredmethods="30" conditionals="0" coveredconditionals="0" statements="145" coveredstatements="78" elements="195" coveredelements="108"/>
   </project>
 </coverage>
