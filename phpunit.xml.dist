@@ -32,7 +32,7 @@
         <exclude>
             <directory suffix=".php">src/DataFixtures</directory>
             <directory suffix=".php">src/Test</directory>
-            <file>Kernel.php</file>
+            <file>src/Kernel.php</file>
         </exclude>
     </coverage>
 

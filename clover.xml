@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1669221667">
-  <project timestamp="1669221667">
+<coverage generated="1669224311">
+  <project timestamp="1669224311">
     <file name="C:\laragon\www\todo_sf5\src\Controller\DefaultController.php">
       <class name="App\Controller\DefaultController" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
@@ -189,7 +189,7 @@
     </file>
     <file name="C:\laragon\www\todo_sf5\src\Form\UserType.php">
       <class name="App\Form\UserType" namespace="global">
-        <metrics complexity="9" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="0" elements="25" coveredelements="0"/>
+        <metrics complexity="9" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="0" elements="29" coveredelements="0"/>
       </class>
       <line num="23" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="27" type="method" name="buildForm" visibility="public" complexity="3" crap="12" count="0"/>
@@ -201,7 +201,11 @@
       <line num="44" type="stmt" count="0"/>
       <line num="51" type="stmt" count="0"/>
       <line num="52" type="stmt" count="0"/>
+      <line num="53" type="stmt" count="0"/>
+      <line num="54" type="stmt" count="0"/>
+      <line num="56" type="stmt" count="0"/>
       <line num="58" type="stmt" count="0"/>
+      <line num="59" type="stmt" count="0"/>
       <line num="62" type="stmt" count="0"/>
       <line num="64" type="stmt" count="0"/>
       <line num="69" type="method" name="onPostSetData" visibility="public" complexity="4" crap="20" count="0"/>
@@ -215,13 +219,7 @@
       <line num="83" type="method" name="configureOptions" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="85" type="stmt" count="0"/>
       <line num="89" type="stmt" count="0"/>
-      <metrics loc="92" ncloc="91" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="0" elements="25" coveredelements="0"/>
-    </file>
-    <file name="C:\laragon\www\todo_sf5\src\Kernel.php">
-      <class name="App\Kernel" namespace="global">
-        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-      </class>
-      <metrics loc="12" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      <metrics loc="92" ncloc="91" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="0" elements="29" coveredelements="0"/>
     </file>
     <file name="C:\laragon\www\todo_sf5\src\Repository\TaskRepository.php">
       <class name="App\Repository\TaskRepository" namespace="global">
@@ -287,6 +285,6 @@
       <line num="54" type="stmt" count="0"/>
       <metrics loc="57" ncloc="50" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="2" elements="15" coveredelements="4"/>
     </file>
-    <metrics files="12" loc="937" ncloc="749" classes="11" methods="56" coveredmethods="30" conditionals="0" coveredconditionals="0" statements="159" coveredstatements="78" elements="215" coveredelements="108"/>
+    <metrics files="11" loc="925" ncloc="737" classes="11" methods="56" coveredmethods="30" conditionals="0" coveredconditionals="0" statements="163" coveredstatements="78" elements="219" coveredelements="108"/>
   </project>
 </coverage>
