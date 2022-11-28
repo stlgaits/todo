@@ -89,6 +89,7 @@ final class UserControllerTest extends CustomTestCase
 
     /**
      * @covers \App\Controller\UserController::edit
+     * @uses \App\Form\UserType
      */
     public function testAdminUserCanEditAnotherUser(): void
     {
@@ -115,18 +116,52 @@ final class UserControllerTest extends CustomTestCase
 
     /**
      * @covers \App\Controller\UserController::edit
+     * @uses \App\Form\UserType
      */
     public function testAdminUserCanPromoteAnotherUser(): void
     {
-        $this->markTestIncomplete();
+        $client = $this->createClient();
+        $userRepository = $this->getEntityManager()->getRepository(User::class);
+        $admin = $userRepository->findOneBy(['username' => 'admin']);
+        $user = $userRepository->findOneBy(['username' => 'userwhichwillchange']);
+        $userId = $user->getId();
+        $client->loginUser($admin);
+        $client->request("GET", "/users/$userId/edit");
+        $client->submitForm('Modifier', [
+            'user[roles]' => 'ROLE_ADMIN',
+        ]);
+        $client->followRedirects();
+        $userAfterUpdate = $userRepository->find($userId);
+        $this->assertNotContains('ROLE_ADMIN', $user->getRoles());
+        $this->assertResponseRedirects('/users', 302);
+        $this->assertNotNull($userRepository->findOneBy(['username' => 'userwhichwillchange']));
+        $this->assertContains('ROLE_ADMIN', $userAfterUpdate->getRoles());
+
     }
 
     /**
      * @covers \App\Controller\UserController::edit
+     * @uses \App\Form\UserType
      */
     public function testAdminUserCanDemoteAnotherUser(): void
     {
-        $this->markTestIncomplete();
+        $client = $this->createClient();
+        $userRepository = $this->getEntityManager()->getRepository(User::class);
+        $admin = $userRepository->findOneBy(['username' => 'admin']);
+        $user = $userRepository->findOneBy(['username' => 'userwhichwillchange']);
+        $userId = $user->getId();
+        $client->loginUser($admin);
+        $client->request("GET", "/users/$userId/edit");
+        $client->submitForm('Modifier', [
+            'user[roles]' => 'ROLE_USER',
+        ]);
+        $client->followRedirects();
+        $userAfterUpdate = $userRepository->find($userId);
+        $this->assertContains('ROLE_ADMIN', $user->getRoles());
+        $this->assertResponseRedirects('/users', 302);
+        $this->assertNotNull($userRepository->findOneBy(['username' => 'userwhichwillchange']));
+        $this->assertContains('ROLE_USER', $userAfterUpdate->getRoles());
+        $this->assertNotContains('ROLE_ADMIN', $userAfterUpdate->getRoles());
     }
 
     /**
@@ -134,6 +169,16 @@ final class UserControllerTest extends CustomTestCase
      */
     public function testNonAdminUserCannotEditAnotherUser(): void
     {
-        $this->markTestIncomplete();
+        $client = $this->createClient();
+        $userRepository = $this->getEntityManager()->getRepository(User::class);
+        $simpleUser = $userRepository->findOneBy(['username' => 'simpleuser']);
+        $subjectUser = $userRepository->findOneBy(['username' => 'userwhichwillchange']);
+        $client->loginUser($simpleUser);
+        $userId = $subjectUser->getId();
+        $client->request("GET", "/users/$userId/edit");
+        $client->followRedirects();
+        $this->assertNotContains('ROLE_ADMIN', $simpleUser->getRoles());
+        $this->assertResponseStatusCodeSame(403);  // Forbidden
+
     }
 }
