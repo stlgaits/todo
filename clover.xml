@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1669664001">
-  <project timestamp="1669664001">
+<coverage generated="1669671905">
+  <project timestamp="1669671905">
     <file name="C:\laragon\www\todo_sf5\src\Controller\DefaultController.php">
       <class name="App\Controller\DefaultController" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
@@ -223,16 +223,16 @@
     </file>
     <file name="C:\laragon\www\todo_sf5\src\Repository\TaskRepository.php">
       <class name="App\Repository\TaskRepository" namespace="global">
-        <metrics complexity="6" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="7" coveredelements="0"/>
+        <metrics complexity="6" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="7" coveredelements="7"/>
       </class>
-      <line num="21" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="23" type="stmt" count="0"/>
-      <line num="85" type="method" name="orderByStatus" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="87" type="stmt" count="0"/>
-      <line num="88" type="stmt" count="0"/>
-      <line num="89" type="stmt" count="0"/>
-      <line num="90" type="stmt" count="0"/>
-      <metrics loc="94" ncloc="47" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="7" coveredelements="0"/>
+      <line num="21" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="23" type="stmt" count="1"/>
+      <line num="85" type="method" name="orderByStatus" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="87" type="stmt" count="1"/>
+      <line num="88" type="stmt" count="1"/>
+      <line num="89" type="stmt" count="1"/>
+      <line num="90" type="stmt" count="1"/>
+      <metrics loc="94" ncloc="47" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="7" coveredelements="7"/>
     </file>
     <file name="C:\laragon\www\todo_sf5\src\Repository\UserRepository.php">
       <class name="App\Repository\UserRepository" namespace="global">
@@ -261,6 +261,6 @@
       <line num="54" type="stmt" count="0"/>
       <metrics loc="57" ncloc="50" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="2" elements="15" coveredelements="4"/>
     </file>
-    <metrics files="11" loc="926" ncloc="736" classes="10" methods="50" coveredmethods="31" conditionals="0" coveredconditionals="0" statements="145" coveredstatements="86" elements="195" coveredelements="117"/>
+    <metrics files="11" loc="926" ncloc="736" classes="10" methods="50" coveredmethods="33" conditionals="0" coveredconditionals="0" statements="145" coveredstatements="91" elements="195" coveredelements="124"/>
   </project>
 </coverage>

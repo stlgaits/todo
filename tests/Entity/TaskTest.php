@@ -13,6 +13,7 @@ use Faker\Provider\Lorem;
 use Symfony\Component\Validator\ConstraintViolation;
 
 /**
+ * @group task
  * @covers \App\Entity\Task
  * @uses \App\Entity\User
  */

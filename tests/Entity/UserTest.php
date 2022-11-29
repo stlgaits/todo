@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\Tests\Entity;
 
+use App\Entity\Task;
 use App\Entity\User;
 use App\Test\CustomTestCase;
 use Symfony\Component\Validator\ConstraintViolation;
 
 /**
+ * @group security
  * @covers App\Entity\User
  */
 final class UserTest extends CustomTestCase
@@ -27,13 +29,21 @@ final class UserTest extends CustomTestCase
      * @covers \App\Entity\User::setEmail
      * @covers \App\Entity\User::setRoles
      */
-    public function testCanGetAndSetData(): void
+    public function testCanGetAndSetData(Task $task): void
     {
         $user = new User();
         $user->setUsername('michel');
         $user->setPassword('mynameismichelandthisismypassword');
         $user->setEmail('michel.vaillant@laposte.net');
         $user->setRoles(['ROLE_FAST_LIFE']);
+        for ($i = 0 ; $i < 5; $i++) {
+            $task = $this->createTask(
+                sprintf('task %s', $i),
+                sprintf('This is task number %s & it requires me to do stuff', $i),
+                $user
+            );
+            $user->addTask($task);
+        }
         $this->assertSame('michel', $user->getUsername());
         $this->assertSame('michel.vaillant@laposte.net', $user->getEmail());
         $this->assertContains('ROLE_FAST_LIFE', $user->getRoles(), 'A role is missing from the user\'s list of roles');
@@ -50,6 +60,32 @@ final class UserTest extends CustomTestCase
         $this->validateUser($user, false);
     }
 
+//
+//    public function taskProvider(): array
+//    {
+//        $tasks = [];
+//        for ($i = 0 ; $i < 5; $i++) {
+//            $task = $this->createTask(
+//                sprintf('task %s', $i),
+//                sprintf('This is task number %s & it requires me to do stuff', $i),
+//            );
+//            $tasks[$i] = $task;
+//        }
+//        return [
+//            $tasks
+//        ];
+//    }
+
+//    public function testCanAssignTaskToUser(): void
+//    {
+//
+//    }
+//
+//    public function testCanGetTaskList(): void
+//    {
+//
+//    }
+
     public function invalidEmailProvider(): array
     {
         return [
@@ -61,7 +97,6 @@ final class UserTest extends CustomTestCase
             ['1@1.']
         ];
     }
-
 
     /**
      * Ensures created User matches validation constraints
@@ -83,4 +118,6 @@ final class UserTest extends CustomTestCase
         }
         $this->assertInstanceOf(User::class, $user);
     }
+
+
 }

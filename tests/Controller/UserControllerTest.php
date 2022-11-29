@@ -136,7 +136,6 @@ final class UserControllerTest extends CustomTestCase
         $this->assertResponseRedirects('/users', 302);
         $this->assertNotNull($userRepository->findOneBy(['username' => 'userwhichwillchange']));
         $this->assertContains('ROLE_ADMIN', $userAfterUpdate->getRoles());
-
     }
 
     /**
@@ -179,6 +178,5 @@ final class UserControllerTest extends CustomTestCase
         $client->followRedirects();
         $this->assertNotContains('ROLE_ADMIN', $simpleUser->getRoles());
         $this->assertResponseStatusCodeSame(403);  // Forbidden
-
     }
 }
