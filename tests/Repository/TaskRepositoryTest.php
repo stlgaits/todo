@@ -28,7 +28,7 @@ class TaskRepositoryTest extends KernelTestCase
         $this->assertInstanceOf(Task::class, $lastTask);
         $this->assertSame(false, $tasks[0]->isDone());
         $this->assertSame(true, $lastTask->isDone());
-        // @TODO: how can we test that this isn't just a luck random result
+        // @TODO: How can we test that this isn't just a luck random result ?
         // How could we split that array & actually check it's ordered by isDone()?
         // $this->markTestIncomplete();
     }

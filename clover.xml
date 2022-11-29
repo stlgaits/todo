@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1669761918">
-  <project timestamp="1669761918">
+<coverage generated="1669765351">
+  <project timestamp="1669765351">
     <file name="C:\laragon\www\todo_sf5\src\Controller\DefaultController.php">
       <class name="App\Controller\DefaultController" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
@@ -90,15 +90,15 @@
     </file>
     <file name="C:\laragon\www\todo_sf5\src\Entity\Task.php">
       <class name="App\Entity\Task" namespace="global">
-        <metrics complexity="13" methods="13" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="16" elements="32" coveredelements="26"/>
+        <metrics complexity="13" methods="13" coveredmethods="13" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="19" elements="32" coveredelements="32"/>
       </class>
       <line num="51" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="12"/>
       <line num="53" type="stmt" count="12"/>
       <line num="54" type="stmt" count="12"/>
-      <line num="57" type="method" name="getId" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="59" type="stmt" count="0"/>
-      <line num="62" type="method" name="getCreatedAt" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="64" type="stmt" count="0"/>
+      <line num="57" type="method" name="getId" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="59" type="stmt" count="1"/>
+      <line num="62" type="method" name="getCreatedAt" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="64" type="stmt" count="1"/>
       <line num="67" type="method" name="setCreatedAt" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="69" type="stmt" count="2"/>
       <line num="71" type="stmt" count="2"/>
@@ -117,23 +117,23 @@
       <line num="103" type="method" name="toggle" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="105" type="stmt" count="1"/>
       <line num="107" type="stmt" count="1"/>
-      <line num="110" type="method" name="getAuthor" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="112" type="stmt" count="1"/>
-      <line num="115" type="method" name="setAuthor" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="117" type="stmt" count="1"/>
-      <line num="119" type="stmt" count="1"/>
-      <line num="122" type="method" name="__toString" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="124" type="stmt" count="0"/>
-      <metrics loc="127" ncloc="100" classes="1" methods="13" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="16" elements="32" coveredelements="26"/>
+      <line num="110" type="method" name="getAuthor" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="112" type="stmt" count="2"/>
+      <line num="115" type="method" name="setAuthor" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="117" type="stmt" count="2"/>
+      <line num="119" type="stmt" count="2"/>
+      <line num="122" type="method" name="__toString" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="124" type="stmt" count="1"/>
+      <metrics loc="127" ncloc="100" classes="1" methods="13" coveredmethods="13" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="19" elements="32" coveredelements="32"/>
     </file>
     <file name="C:\laragon\www\todo_sf5\src\Entity\User.php">
       <class name="App\Entity\User" namespace="global">
-        <metrics complexity="20" methods="16" coveredmethods="14" conditionals="0" coveredconditionals="0" statements="28" coveredstatements="26" elements="44" coveredelements="40"/>
+        <metrics complexity="20" methods="16" coveredmethods="16" conditionals="0" coveredconditionals="0" statements="28" coveredstatements="28" elements="44" coveredelements="44"/>
       </class>
       <line num="57" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="7"/>
       <line num="59" type="stmt" count="7"/>
-      <line num="62" type="method" name="getId" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="64" type="stmt" count="0"/>
+      <line num="62" type="method" name="getId" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="64" type="stmt" count="1"/>
       <line num="67" type="method" name="getUsername" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="69" type="stmt" count="1"/>
       <line num="72" type="method" name="setUsername" visibility="public" complexity="1" crap="1" count="7"/>
@@ -172,9 +172,9 @@
       <line num="172" type="stmt" count="1"/>
       <line num="173" type="stmt" count="1"/>
       <line num="177" type="stmt" count="1"/>
-      <line num="180" type="method" name="__toString" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="182" type="stmt" count="0"/>
-      <metrics loc="185" ncloc="136" classes="1" methods="16" coveredmethods="14" conditionals="0" coveredconditionals="0" statements="28" coveredstatements="26" elements="44" coveredelements="40"/>
+      <line num="180" type="method" name="__toString" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="182" type="stmt" count="1"/>
+      <metrics loc="185" ncloc="136" classes="1" methods="16" coveredmethods="16" conditionals="0" coveredconditionals="0" statements="28" coveredstatements="28" elements="44" coveredelements="44"/>
     </file>
     <file name="C:\laragon\www\todo_sf5\src\Form\TaskType.php">
       <class name="App\Form\TaskType" namespace="global">
@@ -261,6 +261,6 @@
       <line num="54" type="stmt" count="0"/>
       <metrics loc="57" ncloc="50" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="2" elements="15" coveredelements="4"/>
     </file>
-    <metrics files="11" loc="926" ncloc="736" classes="10" methods="50" coveredmethods="38" conditionals="0" coveredconditionals="0" statements="145" coveredstatements="102" elements="195" coveredelements="140"/>
+    <metrics files="11" loc="926" ncloc="736" classes="10" methods="50" coveredmethods="43" conditionals="0" coveredconditionals="0" statements="145" coveredstatements="107" elements="195" coveredelements="150"/>
   </project>
 </coverage>

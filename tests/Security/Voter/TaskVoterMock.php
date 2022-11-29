@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**
  * @coversNothing
+ * This mock is used to be able to access otherwise protected Voter methods
  */
 class TaskVoterMock extends TaskVoter
 {
