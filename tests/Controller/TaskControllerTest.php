@@ -9,6 +9,7 @@ use App\Entity\User;
 use App\Test\CustomTestCase;
 
 /**
+ * @group task
  * @covers \App\Controller\TaskController
  * @uses \App\Security\Voter\TaskVoter
  * @uses \App\Entity\Task
