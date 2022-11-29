@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Entity;
 
 use App\Entity\Task;
+use App\Entity\User;
 use App\Test\CustomTestCase;
 use DateTime;
 use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
@@ -13,8 +14,9 @@ use Faker\Provider\Lorem;
 use Symfony\Component\Validator\ConstraintViolation;
 
 /**
+ * @group task
  * @covers \App\Entity\Task
- * @uses \App\Entity\User
+ * @uses   \App\Entity\User
  */
 final class TaskTest extends CustomTestCase
 {
@@ -34,14 +36,29 @@ final class TaskTest extends CustomTestCase
      */
     public function testCanGetAndSetData(): void
     {
+        $em = $this->getEntityManager();
         $task = new Task();
         $task->setTitle("Faire la vaisselle");
+        $task->setContent("Laver les planches en bois à la main et mettre le reste dans le lave-vaisselle, puis le vider");
         $task->isDone(false);
         $task->setCreatedAt(new DateTime());
-        $task->setContent("Laver les planches en bois à la main et mettre le reste dans le lave-vaisselle, puis le vider");
+        $user = new User();
+        $user->setUsername('mark');
+        $user->setPassword('markpwd123456');
+        $user->setEmail('mark@gmail.com');
+        $task->setAuthor($user);
+        $em->persist($user);
+        $em->persist($task);
+        $em->flush();
+        $this->assertIsInt($task->getId());
         $this->assertSame('Faire la vaisselle', $task->getTitle());
         $this->assertSame('Laver les planches en bois à la main et mettre le reste dans le lave-vaisselle, puis le vider', $task->getContent());
         $this->assertSame(false, $task->isDone());
+        $this->assertSame($task->getTitle(), $task->__toString());
+        $this->assertSame($user, $task->getAuthor());
+        $this->assertInstanceOf(User::class, $task->getAuthor());
+        $this->assertLessThanOrEqual(new DateTime(), $task->getCreatedAt());
+        $this->validateTask($task);
     }
 
     /**
@@ -62,7 +79,7 @@ final class TaskTest extends CustomTestCase
 
     /**
      * @dataProvider titleProvider
-     * @covers \App\Entity\Task::setTitle
+     * @covers       \App\Entity\Task::setTitle
      */
     public function testTaskShouldHaveATitleString(string $title): void
     {
@@ -73,7 +90,7 @@ final class TaskTest extends CustomTestCase
 
     /**
      * @dataProvider contentProvider
-     * @covers \App\Entity\Task::setContent
+     * @covers       \App\Entity\Task::setContent
      */
     public function testTaskShouldHaveADescription(string $content): void
     {
