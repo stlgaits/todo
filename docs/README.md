@@ -149,5 +149,3 @@ The aim of this project is to evaluate the following skills :
 Created by [Estelle Gaits](http://estellegaits.fr) as the eigth project of the Openclassrooms PHP / Symfony Apps Developer training course.
 
 %[{ CONTRIB.md }]%
-
-%[{ CODE_OF_CONDUCT.md }]%
