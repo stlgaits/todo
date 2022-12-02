@@ -34,6 +34,8 @@ DATABASE_URL="mysql://root:password@localhost:3306/todo"
 ADMIN_EMAIL=youremail@example.com
 ADMIN_PASSWORD=ChooseAStrongPersonalPasswordHere
 ADMIN_USERNAME=youradminusername
+APP_ENV=dev
+APP_DEBUG=true
  ```
 
 ### Requirements
@@ -42,7 +44,31 @@ ADMIN_USERNAME=youradminusername
 * yarn & Node.js
 * [composer](https://getcomposer.org/download/)
 * Download the [Symfony CLI](https://symfony.com/download).  
-* Run this command will guide you in cases there are missing extensions or parameters you need to tweek on your machine
+* Run this command will guide you in cases there are missing extensions or parameters you need to tweak on your machine
+
+> It is highly recommended to have the APCU & OPCache PHP plugin configured to optimize performance with the following configuration
+
+````text
+// php.ini
+
+[apcu]
+extension = php_apcu.dll
+apc.enabled = 1
+apc.shm_size = 32M
+apc.ttl = 7200
+apc.enable_cli = 1
+apc.serializer = php
+
+[opcache]
+opcache.enable=1
+opcache.enable_cli=1
+opcache.memory_consumption=128
+opcache.interned_strings_buffer=8
+opcache.max_accelerated_files=10000
+opcache.revalidate_freq=60
+opcache.file_cache="C:/yourfolder/opcache"
+opcache.file_cache_fallback=1
+````
 
 ```bash
 symfony check:requirements  
@@ -80,7 +106,7 @@ php bin/console doctrine:fixtures:load --append
 
 ```bash
 yarn install
-yarn build
+yarn watch
 ```
 
 Now you should be ready to launch the dev webserver using
@@ -93,6 +119,17 @@ The ```symfony serve``` command will start a PHP webserver.
 You can now go to your localhost URL : <http://127.0.0.1:8000> where the app should be displayed.
 
 >NB: alternatively, if you do not wish to use the Symfony webserver, you can always use WAMP / Laragon / MAMP or a similar webserver suite.
+
+## Running the project in prod mode
+
+In order to run the project in production mode, you need to override the following variables in your .env.local file :
+
+```text
+APP_ENV=prod
+APP_DEBUG=false
+ ```
+
+Then, you need to run yarn for prod mode as well with ````yarn build````. 
 
 ## Success Criteria
 
@@ -110,3 +147,7 @@ The aim of this project is to evaluate the following skills :
 ## Credits
 
 Created by [Estelle Gaits](http://estellegaits.fr) as the eigth project of the Openclassrooms PHP / Symfony Apps Developer training course.
+
+%[{ CONTRIB.md }]%
+
+%[{ CODE_OF_CONDUCT.md }]%

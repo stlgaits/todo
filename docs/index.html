@@ -23,7 +23,17 @@
       theme      : 'classic',
       tabComments: true,
       tabHeadings: true
-    }
+    },
+    search: {
+      maxAge: 86400000, // Expiration time, the default one day
+      paths: 'auto',
+      placeholder: 'Type to search',
+      noData: 'No Results!',
+      // Headline depth, 1 - 6
+      depth: 6,
+      hideOtherSidebarContent: false, // whether or not to hide other sidebar content
+    },
+    subMaxLevel: 3,
   }
 </script>
 <!-- Docsify v4 -->
@@ -32,6 +42,8 @@
 <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-sql.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+<script src="//unpkg.com/docsify-include-template/dist/docsify-include-template.js"></script>
+<script src="//unpkg.com/docsify/lib/plugins/search.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
 </body>
 </html>
