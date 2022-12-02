@@ -284,7 +284,7 @@ We ask that, as you make further additions to the source codebase, you simultane
 project's documentation.
 To do so, you will need to install [DocsifyJS](https://docsify.js.org/#/).
 The documentation files are located in the **/docs** folder of the application. You need to be familiar with **
-markdown** syntax and conventions before startin to write.
+markdown** syntax and conventions before starting to write.
 To update the documentation, use the **docs** git branch and push your commits there.
 Once you are satisfied with your changes, please create a merge pull request directly towards the **main** branch.
 Once merged, your changes will be automatically deployed via GitHub Pages there :
